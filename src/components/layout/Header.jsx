@@ -33,7 +33,7 @@ function Header() {
                             onClick={toggleDropdown}
                             style={{ background: 'none', border: 'none', color: 'inherit' }}
                         >
-                            <span className="mr-2"> {user ? `${user.name1} ${user.surname1}` : 'Invitado'} </span>
+                            <span className="mr-2"> {user ? `${user.name}` : 'Invitado'} </span>
                             <i className="bi bi-person-circle"></i>
                         </button>
                         {isDropdownOpen && user && (
