@@ -1,0 +1,190 @@
+/* Variables CSS - Color Scheme */
+:root {
+  --primary: #4e73df;
+  --primary-dark: #2e59d9;
+  --secondary: #858796;
+  --success: #1cc88a;
+  --info: #36b9cc;
+  --warning: #f6c23e;
+  --danger: #e74a3b;
+  --light: #f8f9fc;
+  --dark: #5a5c69;
+  --sidebar-bg: #2d3436;
+  --header-footer-bg: #2d3436;
+  --text-light: #f5f6fa;
+}
+
+/* Estructura Base */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Layout Principal */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar.collapsed .sidebar-brand-text,
+.sidebar.collapsed .sidebar-link span {
+  display: none;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #3E608C;
+  color: white;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  align-items: center;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 20px;
+  color: white;
+  text-decoration: none;
+  justify-content: center;
+  width: 100%;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: #F2CB05;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sidebar-brand-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #F2CB05;
+}
+
+.sidebar-brand-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #F2CB05;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  color: #F2CB05;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  color: #F2CB05;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: all 0.2s;
+}
+
+.sidebar-link i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: bold;
+}
+
+/* Header */
+.header {
+  background-color: var(--header-footer-bg);
+  color: var(--text-light);
+  padding: 1rem;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.15);
+  background: #3E608C;
+}
+
+.header h4 {
+  text-align: center;
+  justify-content: center;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Main Content */
+.main-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+  }
+
+  .sidebar-brand-text,
+  .sidebar-link span {
+    display: none;
+  }
+}
+
+.footer {
+  background: #2d3436;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.my-swal-popup {
+  padding: 1rem !important;  /* reduce el padding general */
+}
+.my-swal-title {
+  font-size: 1rem !important; /* más pequeño */
+  margin-bottom: 0.5rem !important;
+}
+.my-swal-text {
+  font-size: 0.85rem !important;
+  margin: 0 !important;
+}
+.my-swal-button {
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.85rem !important;
+}
