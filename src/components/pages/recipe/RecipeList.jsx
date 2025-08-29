@@ -50,6 +50,7 @@ function Recipe(){
                     <button 
                         // onClick={() => handleDeleteOrder(row.id)}
                         className='btn btn-danger btn-sm rounded-2 p-2'
+                        style={{background:'#D6482D'}}
                         title="Eliminar"
                     >
                         <i className="bi bi-trash fs-6"></i>

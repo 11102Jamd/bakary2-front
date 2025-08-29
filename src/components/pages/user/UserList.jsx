@@ -53,15 +53,15 @@ function User(){
                     <button 
                         // onClick={() => handleDeleteUser(row.id)}
                         className='btn btn-danger btn-sm rounded-2 p-2'
+                        style={{background:'#D6482D'}}
                         title="Eliminar"
                     >
                         <i className="bi bi-trash fs-6"></i>
                     </button>
                     <button 
-                        onClick={() => {
-                            setUserSelected(row);
-                        }} 
+                        onClick={() => {setUserSelected(row);}} 
                         className='btn btn-primary btn-sm ms-2 rounded-2 p-2'
+                        style={{background:'#2DACD6'}}
                         title="Editar"
                     >
                         <i className="bi bi-pencil-square fs-6"></i>

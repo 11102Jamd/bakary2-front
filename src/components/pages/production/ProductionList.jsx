@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import customStyles from "../../../utils/styles/customStyles";
 import paginationOptions from "../../../utils/styles/paginationOptions";
-import { getProduction } from "../../../api/production";
+import { deleteProduction, getProduction } from "../../../api/production";
 import CreateProductionModal from "./CreateProductionModal";
 import ShowProductionDetails from "./ShowProductionDetails";
+import { errorDeleteProduction, showConfirmDeleteProduction, successDeleteProduction } from "../../../utils/alerts/productionAlerts";
 
 function Production(){
     const [production, setProduction] = useState([]);
@@ -27,6 +28,21 @@ function Production(){
             console.error("Error", error);
         } finally {
             setPending(false);
+        };
+    };
+
+
+    const handleDeleteProduction = async (id) => {
+        const result = await showConfirmDeleteProduction();
+        if (result.isConfirmed) {
+            try {
+                await deleteProduction(id);
+                await successDeleteProduction();
+                await fetchProduction();
+            } catch (error) {
+                console.error("error al eliminar la produccion", error);
+                await errorDeleteProduction();
+            };
         };
     };
 
@@ -66,8 +82,9 @@ function Production(){
             cell: row => (
                 <div className="btn-group" role="group">
                     <button 
-                        //onClick={() => handleDeleteOrder(row.id)}
+                        onClick={() => handleDeleteProduction(row.id)}
                         className='btn btn-danger btn-sm rounded-2 p-2'
+                        style={{background:'#D6482D'}}
                         title="Eliminar"
                     >
                         <i className="bi bi-trash fs-6"></i>
@@ -75,6 +92,7 @@ function Production(){
                     <button 
                         onClick={() => setProductionSelected(row)} 
                         className='btn btn-info btn-sm ms-2 rounded-2 p-2'
+                        style={{background:'#2DACD6'}}
                         title="Ver Detalles"
                     >
                         <i className="bi bi-eye fs-6"></i>
