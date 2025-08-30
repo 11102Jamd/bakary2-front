@@ -31,7 +31,7 @@ function RecipeItemsTable({ items, onRemoveItem }) {
                             {items.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.input_id}</td>
-                                    <td>{item.name || 'N/A'}</td>
+                                    <td>{item.input_name || 'N/A'}</td>
                                     <td>{item.quantity_required}</td>
                                     <td>
                                         <button 

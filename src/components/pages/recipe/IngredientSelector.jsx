@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getInput } from "../../../api/input";
+import { LoadingSpinner } from "../../Loading";
 
 
 function IngredientSelector({currentItem, onItemChange, onAddItem}){
@@ -24,10 +25,8 @@ function IngredientSelector({currentItem, onItemChange, onAddItem}){
     if (loading) {
         return (
             <div className="card mb-4">
-                <div className="card-body text-center py-4">
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="visually-hidden">Cargando...</span>
-                    </div>
+                <div className="card-body">
+                    <LoadingSpinner message="cargando insumos"/>
                 </div>
             </div>
         );

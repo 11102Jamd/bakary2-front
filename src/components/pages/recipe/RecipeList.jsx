@@ -5,6 +5,7 @@ import paginationOptions from "../../../utils/styles/paginationOptions";
 import customStyles from "../../../utils/styles/customStyles";
 import CreateRecipeModal from "./CreateRecipeModal";
 import ShowRecipeModal from "./ShowRecipeModal";
+import EditRecipeModal from "./EditRecipeModal";
 
 
 function Recipe(){
@@ -61,6 +62,19 @@ function Recipe(){
                         title="Ver Detalles"
                     >
                         <i className="bi bi-eye fs-6"></i>
+                    </button>
+                    <button
+
+                        onClick={()=> { 
+                            setRecipeSelected(row);
+                            setShowModal(true);
+                        }}
+
+                        className="btn btn-primary btn-sm ms-2 rounded-2 p-2"
+                        style={{background:'#2DACD6'}}
+                        title="editar"
+                    >
+                        <i className="bi bi-pencil-square fs-6"></i>
                     </button>
                 </div>
             ),
@@ -120,6 +134,21 @@ function Recipe(){
                     show={true}
                     onHide={() => setRecipeSelected(null)}
                     recipeId={recipeSelected.id}
+                />
+            )}
+
+            {showModal && recipeSelected && (
+                <EditRecipeModal
+                    recipeId={recipeSelected.id}
+                    onClose={() => {
+                        setShowModal(false);
+                        setRecipeSelected(null);
+                    }}
+                    onRecipeUpdated={() => {
+                        setShowModal(false);
+                        setRecipeSelected(null);
+                        fetchRecipe();
+                    }}
                 />
             )}
         </div>

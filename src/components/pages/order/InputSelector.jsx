@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getInput } from '../../../api/input';
+import { LoadingSpinner } from '../../Loading';
 
 function InputSelector({ currentItem, onItemChange, onAddItem }) {
     const [inputs, setInputs] = useState([]);
@@ -23,9 +24,7 @@ function InputSelector({ currentItem, onItemChange, onAddItem }) {
         return (
             <div className="card mb-4">
                 <div className="card-body text-center py-4">
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="visually-hidden">Cargando...</span>
-                    </div>
+                    <LoadingSpinner message="Cargando Insumos"/>
                 </div>
             </div>
         );

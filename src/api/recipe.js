@@ -30,3 +30,14 @@ export const getRecipeDetails = async(id) => {
         throw error;        
     };
 };
+
+
+export const updateRecipe = async (id, recipeData) => {
+    try {
+        const response = await api.put(`/recipe/${id}`, recipeData);
+        return response.data;
+    } catch (error) {
+        console.error("error al editar la receta", error);
+        throw error;
+    };
+};
