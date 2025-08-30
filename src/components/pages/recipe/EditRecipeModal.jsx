@@ -3,7 +3,7 @@ import { getRecipeDetails, updateRecipe } from "../../../api/recipe";
 import { errorUpdateRecipe, successUpdateRecipe } from "../../../utils/alerts/recipeAlert";
 import IngredientSelector from "./IngredientSelector";
 import RecipeItemsTable from "./RecipeItemsTable";
-import { LoadingModal } from "../../Loading";
+import LoadingModal from "../../Loading";
 
 function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
     const [recipe, setRecipe] = useState({

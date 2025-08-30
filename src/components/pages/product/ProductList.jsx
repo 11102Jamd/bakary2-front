@@ -5,10 +5,12 @@ import customStyles from "../../../utils/styles/customStyles";
 import paginationOptions from "../../../utils/styles/paginationOptions";
 import CreateProductModal from "./CreateProductModal";
 import EditProductModal from "./EditProductModal";
+import SupplyProductModal from "./SupplyProductModal";
 
 function Product(){
     const [product, setProduct] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showSupplyModal, setShowSupplyModal] = useState(false);
     const [productSelected, setProductSelected] = useState(null);
     const [pending, setPending] = useState(true);
 
@@ -31,6 +33,9 @@ function Product(){
         };
     };
 
+    const getCurrentProduction = (product) =>
+        product?.latestProduction?.find(p => parseFloat(p.quantity_produced) > 0) || null;
+
     const columns = [
         {
             name: 'Producto',
@@ -45,28 +50,48 @@ function Product(){
             center: "true"
         },
         {
+            name: 'Stock Actual',
+            selector: row => {
+                if (!row.product_productions || row.product_productions.length === 0) {
+                    return 'N/A';
+                }
+                
+                return row.product_productions[0]?.quantity_produced ?? 'N/A';
+            },
+            sortable: true,
+            center: "true",
+        },
+        {
             name: 'Accion',
             cell: row => (
                 <div className="btn-group" role="group">
                     <button
-                        // onClick={()=> {
-                        //     handleDeleteProduct(row.id);
-                        // }}
                         className="btn btn-danger btn-sm rounded-2 p-2"
                         style={{background:'#D6482D'}}
                         title="eliminar"
                     >
                         <i className="bi bi-trash fs-6"></i>
                     </button>
+
                     <button
-
                         onClick={()=> { setProductSelected(row);}}
-
                         className="btn btn-primary btn-sm ms-2 rounded-2 p-2"
                         style={{background:'#2DACD6'}}
                         title="editar"
                     >
                         <i className="bi bi-pencil-square fs-6"></i>
+                    </button>
+                    
+                    <button
+                        onClick={()=> {
+                            setProductSelected(row);
+                            setShowSupplyModal(true);
+                        }}
+                        className="btn btn-primary btn-sm ms-2 rounded-2 p-2"
+                        style={{background:'#2DEACD'}}
+                        title="Abastecer"
+                    >
+                        <i className="bi bi-plus"></i>    
                     </button>
                 </div>
             ),
@@ -125,6 +150,17 @@ function Product(){
                     product={productSelected}
                     onClose={() => setProductSelected(null)}
                     onProductUpdate={fetchProduct}
+                />
+            )}
+
+            {showSupplyModal && productSelected && (
+                <SupplyProductModal
+                    product={productSelected}
+                    onClose={() => {
+                        setShowSupplyModal(false);
+                        setProductSelected(null);
+                    }}
+                    onProductSupplied={fetchProduct}
                 />
             )}
         </div>

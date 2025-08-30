@@ -1,4 +1,4 @@
-export function LoadingSpinner({ message = "Cargando..." }) {
+function LoadingSpinner({ message = "Cargando..." }) {
     return (
         <div className="text-center py-4">
             <div className="spinner-border text-primary" role="status">
@@ -9,7 +9,7 @@ export function LoadingSpinner({ message = "Cargando..." }) {
     );
 }
 
-export function LoadingModal({ message = "Cargando..." }) {
+function LoadingModal({ message = "Cargando..." }) {
     return (
         <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
             <div className="modal-dialog modal-lg">
@@ -26,3 +26,6 @@ export function LoadingModal({ message = "Cargando..." }) {
     );
 }
 
+export default LoadingModal;
+
+export {LoadingSpinner};

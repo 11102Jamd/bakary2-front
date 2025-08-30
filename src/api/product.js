@@ -30,3 +30,17 @@ export const updateProduct = async (id, productData) => {
         throw error;
     };
 };
+
+
+export const linkProductionToProduct = async (productionId,productId) => {
+    try {
+        const response = await api.post("/products/link-production", {
+            production_id: productionId,
+            product_id: productId
+        });
+        return response.data;
+    } catch (error) {
+        console.error("error al vincular el cproducto con su produccion", error);
+        throw error        
+    };
+};

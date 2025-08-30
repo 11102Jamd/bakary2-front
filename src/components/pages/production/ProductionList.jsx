@@ -49,7 +49,9 @@ function Production(){
     const columns = [
         {
             name: 'Production',
-            selector: row => `${row.id} ${row.recipe?.name}` || 'N/A'
+            selector: row => `${row.id} ${row.recipe?.name}` || 'N/A',
+            sortable:true,
+            center:"true",
         },
         {
             name: 'Precio por Producto',
