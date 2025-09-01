@@ -2,12 +2,12 @@ import Swal from "sweetalert2";
 
 /**
  * 
- * @returns Alertas de creacion de produccion
+ * @returns Alertas de creacion Venta
  */
-export const successCreateProduction = () => {
+export const successCreateSale = () => {
     return Swal.fire({
         title:"Exito",
-        text:"Produccion creada con exito",
+        text:"Venta creada con exito",
         icon:"success",
         showClass: {
             popup: `
@@ -34,10 +34,10 @@ export const successCreateProduction = () => {
     });
 };
 
-export const errorCreateProduction = () => {
+export const errorCreateSale = () => {
     return Swal.fire({
         title:"Error",
-        text:"No se pudo crear la Produccion",
+        text:"No se pudo crear la venta",
         icon:"error",
         background:"#Afffff",
         color:"#220900",
@@ -53,12 +53,12 @@ export const errorCreateProduction = () => {
 
 /**
  * 
- * @returns Alerta de error al obtener los detalles de la produccion
+ * @returns Alerta de error al obtener los detalles
  */
-export const errorShowDetailsProduction = () => {
+export const errorShowDetailsSale = () => {
     return Swal.fire({
         title:"Error",
-        text:"No se puedo traer la produccion con detalles",
+        text:"No se puedo traer la venta con detalles",
         icon:"error",
         background:"#Afffff",
         color:"#220900",
@@ -75,9 +75,9 @@ export const errorShowDetailsProduction = () => {
 
 /**
  * 
- * @returns Alertas de eliminar la Produccion
+ * @returns Alertas de eliminar Venta
  */
-export const showConfirmDeleteProduction = () => {
+export const showConfirmDeleteSale = () => {
     return Swal.fire({
         title:"¿Estas Seguro?",
         text: "¡No podrás revertir esto!",
@@ -103,10 +103,10 @@ export const showConfirmDeleteProduction = () => {
     });
 }
 
-export const errorDeleteProduction = () => {
+export const errorDeleteSale = () => {
     return Swal.fire({
         title:"Error",
-        text:"No se pudo eliminar la produccion",
+        text:"No se pudo eliminar la venta",
         icon:"error",
         background:"#Afffff",
         color:"#220900",
@@ -120,10 +120,10 @@ export const errorDeleteProduction = () => {
     });
 };
 
-export const successDeleteProduction = () => {
+export const successDeleteSale = () => {
     return Swal.fire({
         title:"Exito",
-        text:"Produccion elimnada con exito",
+        text:"Venta eliminada con exito",
         icon:"success",
         showClass: {
             popup: `
@@ -141,46 +141,6 @@ export const successDeleteProduction = () => {
         iconColor: '#77EE74',  // color del círculo del ícono
         confirmButtonText: "Aceptar",
         confirmButtonColor: "#04A1FF",
-        customClass: {
-            popup: "my-swal-popup",
-            title: "my-swal-title",
-            htmlContainer: "my-swal-text",
-            confirmButton: "my-swal-button",
-        }
-    });
-};
-
-/**
- * 
- * @param {Error} message 
- * @returns Error de produccion stock insuficiente
- */
-export const errorProductionStock = (message) => {
-    return Swal.fire({
-        title:"Error",
-        text:message,
-        icon:"error",
-        background:"#Afffff",
-        color:"#220900",
-        width :'350px',
-        customClass: {
-            popup: "my-swal-popup",
-            title: "my-swal-title",
-            htmlContainer: "my-swal-text",
-            confirmButton: "my-swal-button",
-        }
-    });
-};
-
-
-export const errorProduction = (message) => {
-    return Swal.fire({
-        title:"Error",
-        text:message,
-        icon:"error",
-        background:"#Afffff",
-        color:"#220900",
-        width :'350px',
         customClass: {
             popup: "my-swal-popup",
             title: "my-swal-title",

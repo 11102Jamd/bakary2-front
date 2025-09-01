@@ -108,7 +108,7 @@ function SupplyProductModal({ product, onClose, onProductSupplied }) {
                             className="btn btn-primary" 
                             onClick={handleSupply}
                             disabled={!selectedProduction || supplying}
-                            style={{backgroundColor:' #2DEACD', borderColor: '#2DEACD'}}
+                            style={{backgroundColor:'#176FA6', borderColor: '#176FA6'}}
                         >
                             {supplying ? (
                                 <>

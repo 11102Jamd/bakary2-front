@@ -56,7 +56,29 @@ function Product(){
                     return 'N/A';
                 }
                 
-                return row.product_productions[0]?.quantity_produced ?? 'N/A';
+                // Encontrar el último lote con stock disponible
+                const latestWithStock = [...row.product_productions]
+                    .reverse()
+                    .find(production => parseFloat(production.quantity_produced) > 0);
+                
+                return latestWithStock ? parseFloat(latestWithStock.quantity_produced).toFixed(3) : '0';
+            },
+            sortable: true,
+            center: "true",
+        },
+        {
+            name: 'Porcentaje de Ganancia',
+            selector: row => {
+                if (!row.product_productions || row.product_productions.length === 0) {
+                    return 'N/A';
+                }
+                
+                // Encontrar el último lote con stock disponible
+                const latestWithStock = [...row.product_productions]
+                    .reverse()
+                    .find(production => parseFloat(production.profit_margin_porcentage) > 0);
+                
+                return latestWithStock ? (`${latestWithStock.profit_margin_porcentage} %`) : '0';
             },
             sortable: true,
             center: "true",

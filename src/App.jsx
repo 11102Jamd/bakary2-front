@@ -13,6 +13,7 @@ import Login from './components/pages/auth/Login';
 import User from './components/pages/user/UserList';
 import Order from './components/pages/order/OrderList';
 import Recipe from './components/pages/recipe/RecipeList';
+import Sale from './components/pages/sale/SaleList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css'
@@ -64,6 +65,12 @@ function App() {
           <Route path='/compras' element={
             <RoleBasedControl allowedRoles={['Administrador', 'Cajero']}>
               <Order/>
+            </RoleBasedControl>
+          }/>
+
+          <Route path='/ventas' element={
+            <RoleBasedControl allowedRoles={['Administrador', 'Cajero']}>
+              <Sale/>
             </RoleBasedControl>
           }/>
 

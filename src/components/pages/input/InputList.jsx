@@ -45,7 +45,7 @@ function Input(){
                 const stock = parseFloat(getCurrentBatch(row)?.quantity_remaining) || 0;
                 return (
                     <div className={`text-center ${stock === 0 ? "text-danger fw-bold" : ""}`}>
-                        {stock.toFixed(2)} {'g' || ""}
+                        {stock.toFixed(2)} {'g/ml/un' || ""}
                     </div>
                 );
             }

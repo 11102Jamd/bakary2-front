@@ -89,7 +89,6 @@ function Sidebar() {
                     </Link>
                 )}
 
-
                 {(user.rol === 'Administrador') && (
                     <Link to="/reportes" className="sidebar-link">
                         <i className="bi bi-archive"></i>
