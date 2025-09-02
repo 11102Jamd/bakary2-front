@@ -14,10 +14,11 @@ import User from './components/pages/user/UserList';
 import Order from './components/pages/order/OrderList';
 import Recipe from './components/pages/recipe/RecipeList';
 import Sale from './components/pages/sale/SaleList';
+import Production from './components/pages/production/ProductionList';
+import ReportDownloader from './components/pages/report/ReportDownloader';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css'
-import Production from './components/pages/production/ProductionList';
 
 function App() {
 
@@ -86,30 +87,11 @@ function App() {
             </RoleBasedControl>
           }/>
 
-            {/* <Route path='/proveedores' element={
-              <RoleBasedControl allowedRoles={['Administrador']}>
-                <Supplier/>
-              </RoleBasedControl>
-            }/>
-            
-                        
-            <Route path='/pedidos' element={
-              <RoleBasedControl allowedRoles={['Administrador', 'Cajero']}>
-                <Pedidos/>
-              </RoleBasedControl>
-            }/>
-            
-            <Route path='/fabricacion' element={
-              <RoleBasedControl allowedRoles={['Administrador', 'Panadero']}>
-                <Manufacturing/>
-              </RoleBasedControl>
-            }/> 
-
-            <Route path='/reportes' element={
-              <RoleBasedControl allowedRoles={['Administrador']}>
-                <ReportDownloader/>
-              </RoleBasedControl>
-            }/> */}
+          <Route path='/reportes' element={
+            <RoleBasedControl allowedRoles={['Administrador']}>
+              <ReportDownloader/>
+            </RoleBasedControl>
+          }/>
           </Route>
           
           <Route path="*" element={<Navigate to="/login" replace />} />
