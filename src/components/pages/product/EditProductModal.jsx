@@ -26,10 +26,10 @@ function EditProductModal({product, onClose, onProductUpdate}){
 
         switch (id) {
             case 'name':
-                error = validateName('Nombre del Producto');
+                error = validateName(value,'Nombre del Producto');
                 break;
             case 'unit_price':
-                error => validatePrice('Precio del Producto')
+                error = validatePrice(value,'Precio del Producto')
             default:
                 break;
         };
@@ -68,7 +68,7 @@ function EditProductModal({product, onClose, onProductUpdate}){
                             <label htmlFor="name" className="form-label">Producto</label>
                             <input 
                                 type="text" 
-                                className={`form-control form-control-sm ${errors.name ? 'is-invalid' : ''}`} 
+                                className={`form-control form-control-sm ${errors.name ? 'is-invalid' : ''}`}  
                                 id="name" 
                                 value={productUpdate.name} 
                                 onChange={handleChange} 
