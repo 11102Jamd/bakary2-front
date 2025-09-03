@@ -26,7 +26,7 @@ const StatsCards = ({stats, productionStats, inventoryValue}) => {
         {
             title: 'Productos',
             value: stats.total_products || 0,
-            icon: 'bi-box',
+            icon: 'bi bi-cup-hot',
             color: 'warning',
             bg: 'bg-warning'
         },
