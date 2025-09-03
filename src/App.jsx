@@ -19,6 +19,7 @@ import ReportDownloader from './components/pages/report/ReportDownloader';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css'
+import ResetPassword from './components/pages/auth/ResetPassword';
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-        
+          <Route path='/reset-password' element={<ResetPassword/>}/>
           <Route element={
             <PrivateRoute>
               <div className="app-container">

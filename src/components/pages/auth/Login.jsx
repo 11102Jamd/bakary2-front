@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 import '../../../index.css';
 // import { errorLogin } from '../../utils/alerts/alertsUsers';
 
@@ -80,6 +81,7 @@ const Login = () => {
                     <label>Email:</label>
                     <input
                     type="email"
+                    name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -98,6 +100,8 @@ const Login = () => {
                 <button type="submit" disabled={loading}>
                     {loading ? 'Cargando...' : 'Ingresar'}
                 </button>
+                <br />
+                <Link to="/reset-password">¿Quieres Cambiar Contraseña?</Link>
                 </form>
             </div>
             <div className='login-image-panel'>
