@@ -80,7 +80,6 @@ function ShowRecipeModal({ show, onHide, recipeId }){
                                         <div className="col-md-6">
                                             <p><strong>Nombre de la Receta:</strong> {recipe.name || 'N/A'}</p>
                                             <p><strong>Cantidad del Producto:</strong> {recipe.yield_quantity}</p>
-                                            <p><strong>Unidad:</strong> {recipe.unit}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +98,7 @@ function ShowRecipeModal({ show, onHide, recipeId }){
                                                 recipe.recipe_ingredients.map((ingredient, index) => (
                                                     <tr key={index}>
                                                         <td>{ingredient.input?.name || `Insumo ID: ${ingredient.input_id}`}</td>
-                                                        <td>{ingredient.quantity_required} g</td>
+                                                        <td>{ingredient.quantity_required}{ingredient?.input?.batch?.unit_converted}</td>
                                                     </tr>
                                                 ))
                                             ) : (

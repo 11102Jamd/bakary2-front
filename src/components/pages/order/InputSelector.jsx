@@ -45,8 +45,8 @@ function InputSelector({ currentItem, onItemChange, onAddItem, inputs, loading }
                     name="quantity_total"
                     value={currentItem.quantity_total}
                     onChange={onItemChange}
-                    min="0.01"
-                    step="0.01"
+                    min="1"
+                    step="1"
                     required
                     />
                 </div>
@@ -79,8 +79,8 @@ function InputSelector({ currentItem, onItemChange, onAddItem, inputs, loading }
                     name="unit_price"
                     value={currentItem.unit_price}
                     onChange={onItemChange}
-                    min="0.01"
-                    step="0.01"
+                    min="1"
+                    step="1"
                     required
                     />
                 </div>

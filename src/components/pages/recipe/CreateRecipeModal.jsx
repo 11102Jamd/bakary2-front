@@ -8,7 +8,6 @@ function CreateRecipeModal({onClose, onRecipeCreated}){
     const [newRecipe, setNewRecipe] = useState({
         name:'',
         yield_quantity:'',
-        unit:'',
         ingredients:[]
     });
 
@@ -60,7 +59,7 @@ function CreateRecipeModal({onClose, onRecipeCreated}){
     };
 
     const handleSubmit = async () => {
-        if (!newRecipe.name || !newRecipe.yield_quantity || !newRecipe.unit || newRecipe.ingredients.length === 0) {
+        if (!newRecipe.name || !newRecipe.yield_quantity || newRecipe.ingredients.length === 0) {
             return;
         }
         setLoading(true);
@@ -113,18 +112,6 @@ function CreateRecipeModal({onClose, onRecipeCreated}){
                                     required
                                 />
                             </div>
-                            <div className="col-md-3">
-                                <label htmlFor="unit" className="form-label">Unidad</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="unit"
-                                    name="unit"
-                                    value={newRecipe.unit}
-                                    onChange={handleRecipeChange}
-                                    required
-                                />
-                            </div>
                         </div>
 
                         {/* Selector de ingredientes */}
@@ -146,7 +133,7 @@ function CreateRecipeModal({onClose, onRecipeCreated}){
                             className="btn btn-primary"
                             style={{backgroundColor:' #176FA6'}} 
                             onClick={handleSubmit}
-                            disabled={newRecipe.ingredients.length === 0 || !newRecipe.name || !newRecipe.yield_quantity || !newRecipe.unit}
+                            disabled={newRecipe.ingredients.length === 0 || !newRecipe.name || !newRecipe.yield_quantity}
                         >
                             Guardar Receta
                         </button>

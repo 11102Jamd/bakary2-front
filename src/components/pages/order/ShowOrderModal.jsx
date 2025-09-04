@@ -131,7 +131,6 @@ function ShowOrder({ show, onHide, orderId }) {
                                                 <thead className="table-secondary">
                                                     <tr>
                                                         <th>Insumo</th>
-                                                        <th>Unidad Original</th>
                                                         <th>Lote</th>
                                                         <th>Cantidad</th>
                                                         <th>Fecha de Recepción</th>
@@ -141,7 +140,6 @@ function ShowOrder({ show, onHide, orderId }) {
                                                     {order.batches.map((batch, index) => (
                                                         <tr key={index}>
                                                             <td>{batch.input?.name || `Insumo ID: ${batch.input_id}`}</td>
-                                                            <td>{batch.input?.unit}</td>
                                                             <td># {batch.batch_number || batch.id}</td>
                                                             <td>{batch.quantity_remaining || batch.quantity_total} g</td>
                                                             <td>{batch.received_date ? new Date(batch.received_date).toLocaleDateString() : 'N/A'}</td>

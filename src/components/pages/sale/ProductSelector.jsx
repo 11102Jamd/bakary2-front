@@ -64,8 +64,8 @@ function ProductSelector({ currentProduct, onProductChange, onAddProduct }) {
                             name="quantity_requested"
                             value={currentProduct.quantity_requested}
                             onChange={onProductChange}
-                            min="0.1"
-                            step="0.1"
+                            min="1"
+                            step="1"
                             required
                         />
                     </div>

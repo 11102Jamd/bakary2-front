@@ -48,17 +48,38 @@ function User(){
         {
             name:'Nombre',
             selector: row => `${row.id} ${row.name}`,
-            sortable: true
+            sortable: true,
+            center:"true"
+        },
+        {
+            name:'Segundo Nombre',
+            selector: row => row.name2,
+            sortable: true,
+            center:"true"
+        },
+        {
+            name:'Primer Apellido',
+            selector: row => row.surname,
+            sortable: true,
+            center:"true"
+        },
+        {
+            name:'Segundo Apellido',
+            selector: row => row.surname2,
+            sortable:true,
+            center:"true"
         },
         {
             name:'rol',
             selector: row => row.rol,
-            sortable: true
+            sortable: true,
+            center:"true"
         },
         {
             name:'correo',
             selector: row => row.email,
-            sortable: true
+            sortable: true,
+            center:"true"
         },
         {
             name: 'Acciones',

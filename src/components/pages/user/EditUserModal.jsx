@@ -10,6 +10,9 @@ function EditUserModal({user, onClose, onUserUpdated}){
     const validateUserEditForm = () => {
             const newErrors = {
                 name: validateName(userUpdate.name, 'Nombre del Usuario'),
+                name2: validateName(userUpdate.name2, 'Segundo Nombre del Usuario'),
+                surname: validateName(userUpdate.surname, 'Primer Apellido'),
+                surname2: validateName(userUpdate.surname2, 'Segundo Apellido'),
                 email: validateEmail(userUpdate.email, 'Correo del Usuario'),
                 rol: !userUpdate.rol ? 'Debe seleccionar un rol' : null,
             };
@@ -27,6 +30,15 @@ function EditUserModal({user, onClose, onUserUpdated}){
             switch (id) {
                 case 'name': // 👈 tu input tiene id="name1", no "name"
                     error = validateName(value, 'Nombre del Usuario');
+                    break;
+                case 'name2':
+                    error = validateName(value, 'Segundo Nombre del Usuario');
+                    break;
+                case 'surname': 
+                    error = validateName(value, 'Apellido del Usuario');
+                    break;
+                case 'surname2':
+                    error = validateName(value, 'Segundo Apellido del Usuario');
                     break;
                 case 'rol':
                     error = value ? null : 'Debe seleccionar un rol';
@@ -50,6 +62,9 @@ function EditUserModal({user, onClose, onUserUpdated}){
         try {   
             await updateUser(user.id, {
                 name: userUpdate.name,
+                name2: userUpdate.name2,
+                surname: userUpdate.surname,
+                surname2: userUpdate.surname2,
                 email: userUpdate.email,
                 rol: userUpdate.rol
             });
@@ -83,6 +98,42 @@ function EditUserModal({user, onClose, onUserUpdated}){
                                 required 
                             />
                             {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="name2" className="form-label">Segundo Nombre</label>
+                            <input 
+                                type="text" 
+                                className={`form-control form-control-sm ${errors.name2 ? 'is-invalid' : ''}`} 
+                                id="name2" 
+                                value={userUpdate.name2} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                            {errors.name2 && <div className="invalid-feedback">{errors.name2}</div>}
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="surname" className="form-label">Primer Apellido</label>
+                            <input 
+                                type="text" 
+                                className={`form-control form-control-sm ${errors.surname ? 'is-invalid' : ''}`} 
+                                id="surname" 
+                                value={userUpdate.surname} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                            {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="surname2" className="form-label">Segundo Apellido</label>
+                            <input 
+                                type="text" 
+                                className={`form-control form-control-sm ${errors.surname2 ? 'is-invalid' : ''}`} 
+                                id="surname2" 
+                                value={userUpdate.surname2} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                            {errors.surname2 && <div className="invalid-feedback">{errors.surname2}</div>}
                         </div>
                         
                         <div className="mb-3">

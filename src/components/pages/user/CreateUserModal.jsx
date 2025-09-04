@@ -6,6 +6,9 @@ import { createUser } from "../../../api/user";
 function CreateUserModal({onClose, onUserCreated}){
     const [newUser, setNewUser] = useState({
         name:'',
+        name2:'',
+        surname:'',
+        surname2:'',
         email:'',
         rol:'',
         password:''
@@ -16,6 +19,9 @@ function CreateUserModal({onClose, onUserCreated}){
     const validateUserForm = () => {
         const newErrors = {
             name: validateName(newUser.name, 'Nombre del Usuario'),
+            name2: validateName(newUser.name2, 'Segundo Nombre'),
+            surname: validateName(newUser.surname, 'Primer apellido'),
+            surname2: validateName(newUser.surname2, 'Segundo Apellido'),
             email: validateEmail(newUser.email, 'Correo del Usuario'),
             rol: !newUser.rol ? 'Debe seleccionar un rol' : null,
             password: !newUser.password ? 'La contraseña es requerida' : null
@@ -33,6 +39,15 @@ function CreateUserModal({onClose, onUserCreated}){
 
         switch (id) {
             case 'name': // 👈 tu input tiene id="name1", no "name"
+                error = validateName(value, 'Nombre del Usuario');
+                break;
+            case 'name2':
+                error = validateName(value, 'Nombre del Usuario');
+                break;
+            case 'surname': 
+                error = validateName(value, 'Nombre del Usuario');
+                break;
+            case 'surname2':
                 error = validateName(value, 'Nombre del Usuario');
                 break;
             case 'rol':
@@ -66,6 +81,9 @@ function CreateUserModal({onClose, onUserCreated}){
 
             setNewUser({
                 name:'',
+                name2:'',
+                surname:'',
+                surname2:'',
                 email:'',
                 rol:'',
                 password:''
@@ -98,6 +116,45 @@ function CreateUserModal({onClose, onUserCreated}){
                                 required 
                             />
                             {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="name2" className="form-label">Segundo Nombre</label>
+                            <input 
+                                type="text" 
+                                className={`form-control form-control-sm ${errors.name2 ? 'is-invalid' : ''}`} 
+                                id="name2" 
+                                value={newUser.name2} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                            {errors.name2 && <div className="invalid-feedback">{errors.name2}</div>}
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="surname" className="form-label">Primer Apellido</label>
+                            <input 
+                                type="text" 
+                                className={`form-control form-control-sm ${errors.surname ? 'is-invalid' : ''}`} 
+                                id="surname" 
+                                value={newUser.surname} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                            {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="surname2" className="form-label">Segundo Apellido</label>
+                            <input 
+                                type="text" 
+                                className={`form-control form-control-sm ${errors.surname2 ? 'is-invalid' : ''}`} 
+                                id="surname2" 
+                                value={newUser.surname2} 
+                                onChange={handleChange} 
+                                required 
+                            />
+                            {errors.surname2 && <div className="invalid-feedback">{errors.surname2}</div>}
                         </div>
                         
                         <div className="mb-3">

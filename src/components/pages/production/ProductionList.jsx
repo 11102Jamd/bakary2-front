@@ -55,13 +55,13 @@ function Production(){
         },
         {
             name: 'Precio por Producto',
-            selector: row => row.price_for_product ?? 'N/A',
+            selector: row => `$${row.price_for_product} COP`,
             sortable: true,
             center: "true"
         },
         {
             name: 'Costo de Produccion',
-            selector: row => row.total_cost ?? 'N/A',
+            selector: row => `$${row.total_cost} COP`,
             sortable: true,
             center: "true"
         },

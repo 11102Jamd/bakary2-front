@@ -56,7 +56,7 @@ function Product(){
         },
         {
             name: 'Precio Unidad',
-            selector: row => `${row.unit_price} COP`,
+            selector: row => `$${row.unit_price} COP`,
             sortable: true,
             center: "true"
         },
@@ -72,7 +72,7 @@ function Product(){
                     .reverse()
                     .find(production => parseFloat(production.quantity_produced) > 0);
                 
-                return latestWithStock ? parseFloat(latestWithStock.quantity_produced).toFixed(3) : '0';
+                return latestWithStock ? parseFloat(latestWithStock.quantity_produced)+' unidades' : '0';
             },
             sortable: true,
             center: "true",

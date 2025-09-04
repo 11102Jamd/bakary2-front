@@ -9,7 +9,6 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
     const [recipe, setRecipe] = useState({
         name: '',
         yield_quantity: '',
-        unit: '',
         ingredients: []
     });
 
@@ -38,7 +37,6 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
                 setRecipe({
                     name: recipeData.name,
                     yield_quantity: parseFloat(recipeData.yield_quantity),
-                    unit: recipeData.unit,
                     ingredients: transformedIngredients
                 });
 
@@ -94,7 +92,7 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
     };
 
     const handleSubmit = async () => {
-        if (!recipe.name || !recipe.yield_quantity || !recipe.unit || recipe.ingredients.length === 0) {
+        if (!recipe.name || !recipe.yield_quantity || recipe.ingredients.length === 0) {
             return;
         }
 
@@ -104,7 +102,6 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
             const recipeData = {
                 name: recipe.name,
                 yield_quantity: recipe.yield_quantity,
-                unit: recipe.unit,
                 ingredients: recipe.ingredients.map(ingredient => ({
                     input_id: ingredient.input_id,
                     quantity_required: ingredient.quantity_required
@@ -163,18 +160,6 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
                                     required
                                 />
                             </div>
-                            <div className="col-md-3">
-                                <label htmlFor="unit" className="form-label">Unidad</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="unit"
-                                    name="unit"
-                                    value={recipe.unit}
-                                    onChange={handleRecipeChange}
-                                    required
-                                />
-                            </div>
                         </div>
 
                         {/* Selector de ingredientes */}
@@ -196,7 +181,7 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
                             className="btn btn-primary"
                             style={{backgroundColor:' #176FA6'}} 
                             onClick={handleSubmit}
-                            disabled={recipe.ingredients.length === 0 || !recipe.name || !recipe.yield_quantity || !recipe.unit || saving}
+                            disabled={recipe.ingredients.length === 0 || !recipe.name || !recipe.yield_quantity || saving}
                         >
                             Actualizar Receta
                         </button>
