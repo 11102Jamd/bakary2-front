@@ -31,6 +31,16 @@ export const updateProduct = async (id, productData) => {
     };
 };
 
+export const disableProduct = async (id) => {
+    try {
+        const response = await api.patch(`/product/${id}/disable`);
+        return response.data;
+    } catch (error) {
+        console.error("error al inhabilitar el producto", error);
+        throw error;        
+    }
+}
+
 
 export const linkProductionToProduct = async (productionId,productId) => {
     try {

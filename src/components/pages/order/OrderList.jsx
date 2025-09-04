@@ -46,23 +46,28 @@ function Order(){
     const columns = [
         {
             name: 'Proveedor',
-            selector: row => row.supplier_name ?? 'N/A',
+            selector: row => `${row.id} ${row.supplier_name}`,
             sortable: true,
+            center:"true"
+
         },
         {
             name: 'Fecha de Orden',
             selector: row => row.order_date ?? 'N/A',
             sortable: true,
+            center:"true"
         },
         {
             name: 'Total',
-            selector: row => row.order_total ?? 'N/A',
+            selector: row => `$${row.order_total} COP`,
             sortable: true,
+            center:"true"
         },
         {
             name: 'Cant. Items',
             selector: row => row.batches ? row.batches.length : 0,
             sortable: true,
+            center:"true"
         },
         {
             name: 'Acciones',
@@ -86,6 +91,7 @@ function Order(){
                 </div>
             ),
             ignoreRowClick: true,
+            center:"true"
         },
     ];
 

@@ -36,31 +36,27 @@ const OrdersChart = ({ ordersData }) => {
     };
 
     const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-        position: 'top',
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+            padding: 0,
         },
-        title: {
-        display: true,
-        text: 'Órdenes por Día'
+        plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: 'Órdenes por Día' }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: { display: true, text: 'Cantidad' }
+            }
         }
-    },
-    scales: {
-        y: {
-        beginAtZero: true,
-        title: {
-            display: true,
-            text: 'Cantidad'
-        }
-        }
-    }
     };
 
     return (
-    <div className="chart-container" style={{height:'200px'}}>
-        <Bar data={data} options={options} />
-    </div>
+        <div style={{ height: "100%", width: "100%" }}>
+            <Bar data={data} options={{ ...options, maintainAspectRatio: false }} />
+        </div>
     );
 };
 

@@ -135,7 +135,7 @@ const Welcome = () => {
                         <div className="card-header bg-primary text-white py-1 px-2">
                             <h6 className="card-title mb-0 small">Ventas por Período</h6>
                         </div>
-                        <div className="card-body p-1">
+                        <div className="card-body p-1" style={{height:'200px'}}>
                             <SalesChart salesData={salesData} />
                         </div>
                     </div>
@@ -144,7 +144,7 @@ const Welcome = () => {
                         <div className="card-header bg-success text-white py-1 px-2">
                             <h6 className="card-title mb-0 small">Órdenes por Período</h6>
                         </div>
-                        <div className="card-body p-1">
+                        <div className="card-body p-1" style={{height:'200px'}}>
                             <OrdersChart ordersData={ordersData} />
                         </div>
                     </div>

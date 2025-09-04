@@ -2,9 +2,10 @@ import DataTable from "react-data-table-component";
 import paginationOptions from "../../../utils/styles/paginationOptions";
 import customStyles from "../../../utils/styles/customStyles";
 import { useEffect, useState } from "react";
-import { getInput } from "../../../api/input";
+import { disableInput, getInput } from "../../../api/input";
 import CreateInputModal from "./CreateInputModal";
 import EditInputModal from "./EditInputModal";
+import { errorDisableInput, showConfirmDisableInput, successDisableInput } from "../../../utils/alerts/inputAlerts";
 
 function Input(){
     const [input, setInput] = useState([]);
@@ -28,6 +29,20 @@ function Input(){
         }
     };
 
+    const handleDisableInput = async (id) => {
+        const result = await showConfirmDisableInput();
+        if (result.isConfirmed) {
+            try {
+                await disableInput(id);
+                await successDisableInput();
+                await fetchInput();
+            } catch (error) {
+                console.error("error al inhabilitar el insumo",error);
+                await errorDisableInput();                
+            }
+        };
+    };
+
     const getCurrentBatch = (input) =>
         input?.batches?.find(b => parseFloat(b.quantity_remaining) > 0) || null;
 
@@ -38,14 +53,22 @@ function Input(){
             sortable: true,
         },
         {
+            name:'Categoria',
+            selector: row => row.category,
+            sortable: true,
+            center: true
+        },
+        {
             name: "Stock Actual",
             sortable: true,
             center: "true",
             cell: row => {
-                const stock = parseFloat(getCurrentBatch(row)?.quantity_remaining) || 0;
+                const batch = getCurrentBatch(row);
+                const stock = parseInt(batch?.quantity_remaining) || 0;
+                const unit = batch?.unit_converted || "";
                 return (
                     <div className={`text-center ${stock === 0 ? "text-danger fw-bold" : ""}`}>
-                        {stock.toFixed(2)} {'g/ml/un' || ""}
+                        {stock.toFixed(2)} {unit}
                     </div>
                 );
             }
@@ -54,7 +77,7 @@ function Input(){
             name: "Precio Actual",
             selector: row => {
                 const price = parseFloat(getCurrentBatch(row)?.unit_price);
-                return isNaN(price) ? "N/A" : `$${price.toFixed(3)}`;
+                return isNaN(price) ? "N/A" : `$${price.toFixed(3)} COP`;
             },
             sortable: true,
             center: "true",
@@ -70,18 +93,15 @@ function Input(){
             cell: row => (
                 <div className="btn-group" role="group">
                     <button 
-                        //onClick={() => handleDeleteInput(row.id)} 
-                        className='btn btn-danger btn-sm rounded-2 p-2'
-                        style={{background:'#D6482D'}}
-                        title="Eliminar"
+                        onClick={() => handleDisableInput(row.id)} 
+                        className='btn btn-warning btn-sm rounded-2 p-2'
+                        title="Inhabilitar"
                     >
-                        <i className="bi bi-trash fs-6"></i>
+                        <i className="bi bi-lock-fill"></i>  
                     </button>
+
                     <button 
-                        onClick={() => {
-                            console.log('Editando insumo:', row); 
-                            setInputSelected(row);
-                        }} 
+                        onClick={() => { setInputSelected(row);}} 
                         className='btn btn-primary btn-sm ms-2 rounded-2 p-2'
                         style={{background:'#2DACD6'}}
                         title="Editar"

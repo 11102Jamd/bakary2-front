@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { getProduct } from "../../../api/product";
+import { disableProduct, getProduct } from "../../../api/product";
 import DataTable from "react-data-table-component";
 import customStyles from "../../../utils/styles/customStyles";
 import paginationOptions from "../../../utils/styles/paginationOptions";
 import CreateProductModal from "./CreateProductModal";
 import EditProductModal from "./EditProductModal";
 import SupplyProductModal from "./SupplyProductModal";
+import { errorDisableProduct, showConfirmDisableProduct, successDisableProduct } from "../../../utils/alerts/productAlerts";
 
 function Product(){
     const [product, setProduct] = useState([]);
@@ -23,7 +24,6 @@ function Product(){
         try {
             setPending(true);
             const data = await getProduct();
-            // setProduct(Array.isArray(data) ? data : []);
             setProduct(data);
             setPending(false);
         } catch (error) {
@@ -33,8 +33,19 @@ function Product(){
         };
     };
 
-    const getCurrentProduction = (product) =>
-        product?.latestProduction?.find(p => parseFloat(p.quantity_produced) > 0) || null;
+    const handleDisableProduct = async (id) => {
+        const result = await showConfirmDisableProduct();
+        if (result.isConfirmed) {
+            try {
+                await disableProduct(id);
+                await successDisableProduct();
+                await fetchProduct();
+            } catch (error) {
+                console.error("error al inhabilitar un producto", error);
+                await errorDisableProduct();                
+            };
+        };
+    };
 
     const columns = [
         {
@@ -45,7 +56,7 @@ function Product(){
         },
         {
             name: 'Precio Unidad',
-            selector: row => row.unit_price ?? 'N/A',
+            selector: row => `${row.unit_price} COP`,
             sortable: true,
             center: "true"
         },
@@ -88,11 +99,11 @@ function Product(){
             cell: row => (
                 <div className="btn-group" role="group">
                     <button
-                        className="btn btn-danger btn-sm rounded-2 p-2"
-                        style={{background:'#D6482D'}}
+                    onClick={() => { handleDisableProduct(row.id)}}
+                        className="btn btn-warning btn-sm rounded-2 p-2"
                         title="eliminar"
                     >
-                        <i className="bi bi-trash fs-6"></i>
+                        <i className="bi bi-lock-fill"></i> 
                     </button>
 
                     <button

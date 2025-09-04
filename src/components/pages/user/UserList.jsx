@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { getUserList } from "../../../api/user";
+import { disableUser, getUserList } from "../../../api/user";
 import DataTable from "react-data-table-component";
 import customStyles from "../../../utils/styles/customStyles";
 import paginationOptions from "../../../utils/styles/paginationOptions";
 import CreateUserModal from "./CreateUserModal";
 import EditUserModal from "./EditUserModal";
+import { errorDisableUser, showConfirmDisableUser, successDisableUser } from "../../../utils/alerts/userAlerts";
 
 
 function User(){
@@ -29,6 +30,19 @@ function User(){
         };
     };
 
+    const handleDisableUser = async (id) => {
+        const result = await showConfirmDisableUser();
+        if (result.isConfirmed) {
+            try {
+                await disableUser(id);
+                await successDisableUser();
+                await fetchUser();
+            } catch (error) {
+                console.error("error al inhabilitar el usuario", error);
+                await errorDisableUser();                
+            };
+        };
+    };
 
     const columns = [
         {
@@ -51,13 +65,13 @@ function User(){
             cell: row => (
                 <div className="btn-group" role="group">
                     <button 
-                        // onClick={() => handleDeleteUser(row.id)}
-                        className='btn btn-danger btn-sm rounded-2 p-2'
-                        style={{background:'#D6482D'}}
-                        title="Eliminar"
+                        onClick={() => handleDisableUser(row.id)}
+                        className='btn btn-warning btn-sm rounded-2 p-2'
+                        title="Inhabilitarr"
                     >
-                        <i className="bi bi-trash fs-6"></i>
+                        <i className="bi bi-lock-fill"></i> 
                     </button>
+
                     <button 
                         onClick={() => {setUserSelected(row);}} 
                         className='btn btn-primary btn-sm ms-2 rounded-2 p-2'

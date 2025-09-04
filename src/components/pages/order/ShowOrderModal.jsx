@@ -103,7 +103,7 @@ function ShowOrder({ show, onHide, orderId }) {
                                                 order.batches.map((batch, index) => (
                                                     <tr key={index}>
                                                         <td>{batch.input?.name || `Insumo ID: ${batch.input_id}`}</td>
-                                                        <td>{batch.quantity_total.toLocaleString()} {batch.input?.unit || 'un'}</td>
+                                                        <td>{batch.quantity_total.toLocaleString()} {batch.unit}</td>
                                                         <td>${batch.unit_price?.toLocaleString() || '0'}</td>
                                                         <td>${(batch.subtotal_price).toLocaleString()}</td>
                                                     </tr>

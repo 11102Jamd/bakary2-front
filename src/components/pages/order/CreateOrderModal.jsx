@@ -1,8 +1,10 @@
+// CreateOrderModal.js
 import React, { useState, useEffect } from 'react';
 import {createOrder} from "../../../api/order";
 import { successCreateOrder, errorCreateOrder } from '../../../utils/alerts/orderAlerts';
 import InputSelector from './InputSelector';
 import OrderItemsTable from './OrderItemsTable';
+import { getInput } from '../../../api/input'; // ← Importa la función
 
 function CreateOrderModal({ onClose, onOrderCreated }) {
     const [order, setOrder] = useState({
@@ -14,19 +16,35 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
     const [currentItem, setCurrentItem] = useState({
         input_id: '',
         quantity_total: '',
+        unit: '', // ← Asegúrate de incluir unit aquí
         unit_price: ''
     });
 
     const [loading, setLoading] = useState(false);
+    const [inputs, setInputs] = useState([]); // ← Estado local para insumos
+
+    // Cargar insumos solo una vez
+    useEffect(() => {
+        const fetchInputs = async () => {
+            try {
+                const data = await getInput();
+                setInputs(data);
+            } catch (error) {
+                console.error("Error cargando insumos:", error);
+            }
+        };
+        fetchInputs();
+    }, []);
 
     const addItem = () => {
-        if (!currentItem.input_id || !currentItem.quantity_total || !currentItem.unit_price) {
+        if (!currentItem.input_id || !currentItem.quantity_total || !currentItem.unit_price || !currentItem.unit) {
             return;
         }
 
         const newItem = {
             input_id: parseInt(currentItem.input_id),
             quantity_total: parseFloat(currentItem.quantity_total),
+            unit: currentItem.unit, // ← Incluye la unidad
             unit_price: parseFloat(currentItem.unit_price)
         };
 
@@ -38,6 +56,7 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
         setCurrentItem({
             input_id: '',
             quantity_total: '',
+            unit: '',
             unit_price: ''
         });
     };
@@ -103,12 +122,14 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
                             currentItem={currentItem}
                             onItemChange={handleItemChange}
                             onAddItem={addItem}
+                            inputs={inputs} // ← Pasa los insumos al selector
                         />
 
-                        {/* Tabla de items de la orden */}
+                        {/* Tabla de items de la orden - PASA LOS INSUMOS */}
                         <OrderItemsTable 
                             items={order.items}
                             onRemoveItem={removeItem}
+                            inputs={inputs} // ← Esto es lo importante
                         />
                     </div>
                     <div className="modal-footer">
@@ -128,10 +149,3 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
 }
 
 export default CreateOrderModal;
-
-{/* {loading ? (
-    <>
-        <span className="spinner-border spinner-border-sm me-2" role="status"></span>
-        Guardando...
-    </>
-) : 'Guardar Orden'} */}

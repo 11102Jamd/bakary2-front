@@ -1,4 +1,4 @@
-function LoadingSpinner({ message = "Cargando..." }) {
+export const LoadingSpinner = ({ message = "Cargando..." }) => {
     return (
         <div className="text-center py-4">
             <div className="spinner-border text-primary" role="status">
@@ -27,5 +27,3 @@ function LoadingModal({ message = "Cargando..." }) {
 }
 
 export default LoadingModal;
-
-export {LoadingSpinner};

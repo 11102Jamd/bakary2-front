@@ -30,3 +30,14 @@ export const updateUser = async(id, userData) => {
         throw error;
     };
 };
+
+
+export const disableUser = async(id) => {
+    try {
+        const response = await api.patch(`/user/${id}/disable`);
+        return response.data;
+    } catch (error) {
+        console.error("error al inhabilitar el usuario", error);
+        throw error;
+    };
+};

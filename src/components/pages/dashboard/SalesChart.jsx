@@ -63,7 +63,7 @@ const SalesChart = ({ salesData }) => {
     };
 
     return (
-        <div className="chart-container" style={{height:'200px'}}>
+        <div style={{ height: "100%", width: "100%" }}>
             <Line data={data} options={options} />
         </div>
     );

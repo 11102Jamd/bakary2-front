@@ -40,7 +40,7 @@ function Recipe(){
         },
         {
             name:'Cantidad',
-            selector: row => `${row.yield_quantity} ${row.unit}`,
+            selector: row => `${row.yield_quantity} unidades`,
             sortable: true,
             center: "true" 
         },

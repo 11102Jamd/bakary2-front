@@ -10,7 +10,7 @@ function EditInputModal({input, onClose, onInputUpdated}){
     const validateFormEditInput = () => {
         const newErrors = {
             name: validateName(inputUpdate.name, 'Nombre del insumo'),
-            unit: !inputUpdate.unit ? 'La unidad de medida es requerida' : null  
+            category: !inputUpdate.category ? 'La categoria es requerida' : null  
         };
 
         setErrors(newErrors);
@@ -27,8 +27,8 @@ function EditInputModal({input, onClose, onInputUpdated}){
             case 'name':
                 error = validateName(value, 'Nombre del Insumo');
                 break;
-            case 'unit':
-                error = !inputUpdate.unit ? 'La unidad de medida es requerida' : null 
+            case 'category':
+                error = !inputUpdate.category ? 'La categoria es requerida' : null 
                 break;
             default:
                 break;
@@ -45,7 +45,7 @@ function EditInputModal({input, onClose, onInputUpdated}){
         try {
             await updateInput(input.id, {
                 name:inputUpdate.name,
-                unit:inputUpdate.unit
+                category:inputUpdate.category
             });
             await succesUpdateInput();
             onInputUpdated();
@@ -61,7 +61,7 @@ function EditInputModal({input, onClose, onInputUpdated}){
             <div className="modal-dialog modal-sm">
                 <div className="modal-content">
                     <div className="modal-header text-white" style={{ backgroundColor: '#176FA6' }}>
-                        <h5 className="modal-title">Editar Insumo</h5> {/* Corregido el título */}
+                        <h5 className="modal-title">Editar Insumo</h5> 
                         <button type="button" className="btn-close btn-close-white" onClick={onClose}></button>
                     </div>
                     <div className="modal-body">
@@ -78,22 +78,20 @@ function EditInputModal({input, onClose, onInputUpdated}){
                             {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="unit" className="form-label">Unidad de Medida</label>
+                            <label htmlFor="category" className="form-label">Categoria</label>
                             <select 
-                                className={`form-control form-control-sm ${errors.unit ? 'is-invalid' : ''}`} 
-                                id="unit"
-                                value={inputUpdate.unit}
+                                className={`form-control form-control-sm ${errors.category ? 'is-invalid' : ''}`} 
+                                id="category"
+                                value={inputUpdate.category}
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="">Selecciona una Unidad</option>
-                                <option value="kg">kilogramos</option>
-                                <option value="lb">Libras</option>
-                                <option value="l">Litros</option>
-                                <option value="un">unidad</option>
-                                <option value="g">gramos</option>
+                                <option value="">Selecciona una Categoria</option>
+                                <option value="liquidos">Liquidos</option>
+                                <option value="solidos contables">Solido Contable</option>
+                                <option value="solidos no contables">Solido no Contable</option>
                             </select>
-                            {errors.unit && <div className="invalid-feedback">{errors.unit}</div>}
+                            {errors.category && <div className="invalid-feedback">{errors.category}</div>}
                         </div>
                     </div>
                     <div className="modal-footer">

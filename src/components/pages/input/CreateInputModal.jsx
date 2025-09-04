@@ -6,7 +6,7 @@ import { validateName } from "../../../utils/validations/validationFields";
 function CreateInputModal({onClose, onInputCreated}){
     const [newInput, setNewInput] = useState({
         name:'',
-        unit:''
+        category:''
     });
 
     const [errors, setErrors] = useState({});
@@ -14,7 +14,7 @@ function CreateInputModal({onClose, onInputCreated}){
     const validateFormInput = () => {
         const newErrors = {
             name: validateName(newInput.name, 'Nombre del insumo'),
-            unit: !newInput.unit ? 'La unidad de medida es requerida' : null        };
+            category: !newInput.category ? 'La categoria es requeirda' : null        };
 
         setErrors(newErrors);
 
@@ -48,7 +48,7 @@ function CreateInputModal({onClose, onInputCreated}){
             onClose();
             setNewInput({
                 name:'',
-                unit:''
+                category:''
             });
         } catch (error) {
             console.error('error al crear el inusmo', error);
@@ -78,22 +78,20 @@ function CreateInputModal({onClose, onInputCreated}){
                             {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="unit" className="form-label">Unidad de Medida</label>
+                            <label htmlFor="category" className="form-label">Categoria</label>
                             <select 
-                                className={`form-control form-control-sm ${errors.unit ? 'is-invalid' : ''}`} 
-                                id="unit"
-                                value={newInput.unit}
+                                className={`form-control form-control-sm ${errors.category ? 'is-invalid' : ''}`} 
+                                id="category"
+                                value={newInput.category}
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="">Selecciona una Unidad</option>
-                                <option value="kg">kilogramos</option>
-                                <option value="lb">Libras</option>
-                                <option value="l">Litros</option>
-                                <option value="un">unidad</option>
-                                <option value="g">gramos</option>
+                                <option value="">Selecciona una Categoria</option>
+                                <option value="liquidos">Liquidos</option>
+                                <option value="solidos contables">Solidos Contable</option>
+                                <option value="solidos no contables">Solidos no Contable</option>
                             </select>
-                            {errors.unit && <div className="invalid-feedback">{errors.unit}</div>}
+                            {errors.category && <div className="invalid-feedback">{errors.category}</div>}
                         </div>
                     </div>
                     <div className="modal-footer" style={{alignItems:'center'}}>

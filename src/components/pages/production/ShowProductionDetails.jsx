@@ -106,7 +106,7 @@ function ShowProductionDetails({ show, onHide, productionId }) {
                                                 production.consumptions.map((consumption, index) => (
                                                     <tr key={index}>
                                                         <td>{consumption.input?.name || `Insumo ID: ${consumption.input_id}`}</td>
-                                                        <td>{consumption.quantity_used?.toLocaleString()} g</td>
+                                                        <td>{consumption.quantity_used?.toLocaleString()} {consumption.batch?.unit_converted}</td>
                                                         <td>${consumption.batch?.unit_price.toLocaleString() || '0'}</td>
                                                         <td>{consumption.batch?.batch_number || 'N/A'}</td>
                                                         <td>${consumption.total_cost?.toLocaleString() || '0'}</td>

@@ -33,3 +33,12 @@ export const updateInput = async (id, inputData) => {
     };
 };
 
+export const disableInput = async (id) => {
+    try {
+        const response = await api.patch(`/input/${id}/disable`);
+        return response.data;
+    } catch (error) {
+        console.error("error al inhabilitar el insumo", error);
+        throw error;        
+    };
+};
