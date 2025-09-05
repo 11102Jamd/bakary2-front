@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React from "react";
-
+// 'http://localhost:8000/api' ||
 /**
  * Instacia preconfigurada de axios para realizar solicitudes HTTP
  */
 const api = axios.create({
-    baseURL: 'https://bakary2.onrender.com/api' || 'http://localhost:8000/api',//probar con el or
+    baseURL: 'https://bakary2.onrender.com/api',//probar con el or
     headers: {
         'Content-Type': 'application/json', // Tipo de Contenido JSON
         'Accept': 'application/json',   // Aceptar espuesta JSON
