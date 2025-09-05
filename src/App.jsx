@@ -1,4 +1,5 @@
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet} from 'react-router-dom';
 import { AuthProvider } from './components/context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
