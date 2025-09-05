@@ -5,7 +5,7 @@ import React from "react";
  * Instacia preconfigurada de axios para realizar solicitudes HTTP
  */
 const api = axios.create({
-    baseURL: 'http://localhost:8000/api', // URL base de la API
+    baseURL: 'https://bakary2.onrender.com/api',
     headers: {
         'Content-Type': 'application/json', // Tipo de Contenido JSON
         'Accept': 'application/json',   // Aceptar espuesta JSON
@@ -43,3 +43,13 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+
+// const api = axios.create({
+//     baseURL: 'http://localhost:8000/api', // URL base de la API
+//     headers: {
+//         'Content-Type': 'application/json', // Tipo de Contenido JSON
+//         'Accept': 'application/json',   // Aceptar espuesta JSON
+//         'X-Requested-With': 'XMLHttpRequest' // Indicador de solicitud
+//     }
+// });
