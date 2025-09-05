@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { deleteSale, getSale } from "../../../api/sale";
 import customStyles from "../../../utils/styles/customStyles";

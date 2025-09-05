@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { validateName, validatePrice } from "../../../utils/validations/validationFields";
 import { errorUpdateProduct, succesUpdateProduct } from "../../../utils/alerts/productAlerts";

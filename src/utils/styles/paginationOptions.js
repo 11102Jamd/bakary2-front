@@ -1,3 +1,5 @@
+import React from "react";
+
 const paginationOptions = {
     rowsPerPageText: 'Registros por página:',
     rangeSeparatorText: 'de',

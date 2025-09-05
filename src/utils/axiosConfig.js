@@ -1,4 +1,5 @@
 import axios from 'axios';
+import React from "react";
 
 /**
  * Instacia preconfigurada de axios para realizar solicitudes HTTP

@@ -1,4 +1,4 @@
-
+import React from "react";
 
 const StatsCards = ({stats, productionStats, inventoryValue}) => {
     const statItems = [

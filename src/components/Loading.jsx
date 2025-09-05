@@ -1,3 +1,5 @@
+import React from "react";
+
 export const LoadingSpinner = ({ message = "Cargando..." }) => {
     return (
         <div className="text-center py-4">

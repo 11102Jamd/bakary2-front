@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { getInput } from "../../../api/input";
 import { LoadingSpinner } from "../../Loading";

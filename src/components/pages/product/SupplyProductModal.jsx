@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { linkProductionToProduct } from "../../../api/product";
 import { getProduction } from "../../../api/production";

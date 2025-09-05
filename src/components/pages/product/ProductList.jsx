@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { disableProduct, getProduct } from "../../../api/product";
 import DataTable from "react-data-table-component";

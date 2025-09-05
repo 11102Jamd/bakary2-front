@@ -1,4 +1,3 @@
-import { errorShowDetailsSale } from "../utils/alerts/saleAlerts";
 import api from "../utils/axiosConfig";
 
 export const getSale = async () => {

@@ -1,3 +1,4 @@
+import React from "react";
 import { LoadingSpinner } from "../../Loading";
 
 function InputSelector({ currentItem, onItemChange, onAddItem, inputs, loading }) {

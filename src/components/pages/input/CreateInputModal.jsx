@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { createInput } from "../../../api/input";
 import { errorCreateInput, succesCreateInput } from "../../../utils/alerts/inputAlerts";

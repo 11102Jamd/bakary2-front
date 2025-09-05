@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { validateEmail, validateName } from "../../../utils/validations/validationFields";
 import { errorUpdateUser, succesUpdateUser } from "../../../utils/alerts/userAlerts";

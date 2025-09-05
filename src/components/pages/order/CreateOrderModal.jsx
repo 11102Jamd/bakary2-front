@@ -1,4 +1,3 @@
-// CreateOrderModal.js
 import React, { useState, useEffect } from 'react';
 import {createOrder} from "../../../api/order";
 import { successCreateOrder, errorCreateOrder } from '../../../utils/alerts/orderAlerts';

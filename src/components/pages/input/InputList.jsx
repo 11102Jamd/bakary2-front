@@ -1,3 +1,4 @@
+import React from "react";
 import DataTable from "react-data-table-component";
 import paginationOptions from "../../../utils/styles/paginationOptions";
 import customStyles from "../../../utils/styles/customStyles";

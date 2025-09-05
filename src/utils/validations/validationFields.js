@@ -1,3 +1,6 @@
+import React from "react";
+
+
 /**
  * Valida que un nombre sea no vacío y contenga solo caracteres permitidos.
  * @param {string} value - Valor del nombre a validar.
