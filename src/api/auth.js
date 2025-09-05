@@ -1,7 +1,7 @@
 import api from "../utils/axiosConfig";
 
-const LARAVEL_BASE_URL = 'http://localhost:8000';
-
+const LARAVEL_BASE_URL = 'https://bakary2.onrender.com/api';
+// 'http://localhost:8000' || 
 /**
  * Inicia sesión en el sistema.
  * Envía las credenciales al backend y guarda el token en el almacenamiento local.
