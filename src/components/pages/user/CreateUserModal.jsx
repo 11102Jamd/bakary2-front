@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { validateEmail, validateName } from "../../../utils/validations/validationFields";
+import { validateEmail, validateName, validatePassword } from "../../../utils/validations/validationFields";
 import { errorCreateUser, succesCreateUser } from "../../../utils/alerts/userAlerts";
 import { createUser } from "../../../api/user";
 
@@ -25,7 +25,7 @@ function CreateUserModal({onClose, onUserCreated}){
             surname2: validateName(newUser.surname2, 'Segundo Apellido'),
             email: validateEmail(newUser.email, 'Correo del Usuario'),
             rol: !newUser.rol ? 'Debe seleccionar un rol' : null,
-            password: !newUser.password ? 'La contraseña es requerida' : null
+            password: validatePassword(newUser.password, 'La Contraseña')
         };
         setErrors(newErrors);
         return !Object.values(newErrors).some(error => error !== null);
@@ -58,7 +58,7 @@ function CreateUserModal({onClose, onUserCreated}){
                 error = validateEmail(value, 'correo del Usuario');
                 break;
             case 'password':
-                error = value ? null : 'Debe crear una contraseña';
+                error = validatePassword(value, 'La contraseña');
                 break;
             default:
                 break;
@@ -194,12 +194,13 @@ function CreateUserModal({onClose, onUserCreated}){
                             <label htmlFor="password" className="form-label">Contraseña</label>
                             <input 
                                 type="password" 
-                                className={`form-control form-control-sm ${errors.rol ? 'is-invalid' : ''}`} 
+                                className={`form-control form-control-sm ${errors.password ? 'is-invalid' : ''}`} 
                                 id="password" 
                                 value={newUser.password} 
                                 onChange={handleChange} 
                                 required 
                             />
+                            {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                         </div>
                     </div>
                     <div className="modal-footer" style={{alignItems:'center'}}>

@@ -6,7 +6,7 @@ import React from "react";
  * Instacia preconfigurada de axios para realizar solicitudes HTTP
  */
 const api = axios.create({
-    baseURL: 'http://localhost:8000/api',//probar con el or
+    baseURL: 'https://bakary2.onrender.com/api',//probar con el or
     headers: {
         'Content-Type': 'application/json', // Tipo de Contenido JSON
         'Accept': 'application/json',   // Aceptar espuesta JSON

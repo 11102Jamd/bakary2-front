@@ -105,6 +105,7 @@ function User(){
                 </div>
             ),
             ignoreRowClick: true,
+            center:"true"
         }
     ];
 

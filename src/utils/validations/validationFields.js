@@ -86,3 +86,18 @@ export const validatePrice = (value) => {
 
   return null;
 };
+
+/**
+ * Validar que la contraseña sea de 8 digitos como minimo
+ * @param {value} value 
+ * @returns 
+ */
+export const validatePassword = (value) => {
+    if (!value) return 'La contraseña es requerida';
+
+    if (value.length < 8) {
+        return 'Se permite cualquier digito perio como mino debe ser de 8 digitos';
+    }
+
+    return null;
+};
