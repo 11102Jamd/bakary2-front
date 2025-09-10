@@ -62,7 +62,7 @@ function OrderItemsTable({ items, onRemoveItem, inputs }) { // ← Agrega 'input
                     <tr className="table-primary">
                         <td colSpan="4" className="text-end fw-bold">Total:</td>
                         <td className="fw-bold">
-                        ${items.reduce((total, item) => total + (item.quantity_total * item.unit_price), 0).toFixed(3)}
+                        ${items.reduce((total, item) => total + (item.quantity_total * item.unit_price), 0).toFixed(1)}
                         </td>
                         <td></td>
                     </tr>
