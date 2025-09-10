@@ -99,7 +99,7 @@ function ShowRecipeModal({ show, onHide, recipeId }){
                                                 recipe.recipe_ingredients.map((ingredient, index) => (
                                                     <tr key={index}>
                                                         <td>{ingredient.input?.name || `Insumo ID: ${ingredient.input_id}`}</td>
-                                                        <td>{ingredient.quantity_required}{ingredient?.input?.batch?.unit_converted}</td>
+                                                        <td>{ingredient.quantity_required} {ingredient.unit_used}</td>
                                                     </tr>
                                                 ))
                                             ) : (

@@ -1,12 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { getRecipe } from "../../../api/recipe";
+import { disableRecipe, getRecipe } from "../../../api/recipe";
 import paginationOptions from "../../../utils/styles/paginationOptions";
 import customStyles from "../../../utils/styles/customStyles";
 import CreateRecipeModal from "./CreateRecipeModal";
 import ShowRecipeModal from "./ShowRecipeModal";
 import EditRecipeModal from "./EditRecipeModal";
+import { errorDisableRecipe, showConfirmDisableRecipe, successDisableRecipe } from "../../../utils/alerts/recipeAlert";
 
 
 function Recipe(){
@@ -31,6 +32,19 @@ function Recipe(){
         };
     };
 
+    const handleDisableRecipe = async(id) => {
+        const result = await showConfirmDisableRecipe();
+        if (result.isConfirmed) {
+            try {
+                await disableRecipe(id);
+                await successDisableRecipe();
+                await fetchRecipe();
+            } catch (error) {
+                console.error("error al inhabilitar la receta", error);
+                await errorDisableRecipe();                
+            };
+        };
+    };
 
     const columns = [
         {
@@ -50,9 +64,8 @@ function Recipe(){
             cell: row => (
                 <div className="btn-group" role="group">
                     <button 
-                        // onClick={() => handleDeleteOrder(row.id)}
-                        className='btn btn-danger btn-sm rounded-2 p-2'
-                        style={{background:'#D6482D'}}
+                        onClick={() => handleDisableRecipe(row.id)}
+                        className='btn btn-warning btn-sm rounded-2 p-2'
                         title="Eliminar"
                     >
                         <i className="bi bi-trash fs-6"></i>

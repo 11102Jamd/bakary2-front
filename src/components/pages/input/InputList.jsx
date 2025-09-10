@@ -78,7 +78,10 @@ function Input(){
             name: "Precio Actual",
             selector: row => {
                 const price = parseFloat(getCurrentBatch(row)?.unit_price);
-                return isNaN(price) ? "N/A" : `$${price.toFixed(3)} COP`;
+                return isNaN(price) ? "N/A" : `$${parseFloat(price).toLocaleString('es-CO',{
+                    minimumFractionDigits:0,
+                    maximumFractionDigits:0
+                })} COP`;
             },
             sortable: true,
             center: "true",

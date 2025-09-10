@@ -88,9 +88,9 @@ function CreateInputModal({onClose, onInputCreated}){
                                 required
                             >
                                 <option value="">Selecciona una Categoria</option>
-                                <option value="liquidos">Liquidos</option>
-                                <option value="solidos contables">Solidos Contable</option>
-                                <option value="solidos no contables">Solidos no Contable</option>
+                                <option value="liquido">Liquidos</option>
+                                <option value="solido_con">Solidos Contable</option>
+                                <option value="solido_no_con">Solidos no Contable</option>
                             </select>
                             {errors.category && <div className="invalid-feedback">{errors.category}</div>}
                         </div>

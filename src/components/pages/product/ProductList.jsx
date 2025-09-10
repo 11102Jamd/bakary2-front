@@ -57,7 +57,10 @@ function Product(){
         },
         {
             name: 'Precio Unidad',
-            selector: row => `$${row.unit_price} COP`,
+            selector: row => `$${parseFloat(row.unit_price).toLocaleString('es-CO',{
+                minimumFractionDigits:0,
+                maximumFractionDigits:0
+            })} COP`,
             sortable: true,
             center: "true"
         },

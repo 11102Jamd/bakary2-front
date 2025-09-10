@@ -45,8 +45,8 @@ function OrderItemsTable({ items, onRemoveItem, inputs }) { // ← Agrega 'input
                             </td>
                             <td>{item.quantity_total}</td>
                             <td>{item.unit || 'N/A'}</td>
-                            <td>${item.unit_price?.toFixed(3) || '0.000'}</td>
-                            <td>${subtotal.toFixed(3)}</td>
+                            <td>${item.unit_price?.toFixed(1) || '0.0'}</td>
+                            <td>${subtotal.toFixed(1)}</td>
                             <td>
                             <button 
                                 onClick={() => onRemoveItem(index)}

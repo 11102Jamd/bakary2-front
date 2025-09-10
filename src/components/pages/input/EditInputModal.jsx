@@ -88,9 +88,9 @@ function EditInputModal({input, onClose, onInputUpdated}){
                                 required
                             >
                                 <option value="">Selecciona una Categoria</option>
-                                <option value="liquidos">Liquidos</option>
-                                <option value="solidos contables">Solido Contable</option>
-                                <option value="solidos no contables">Solido no Contable</option>
+                                <option value="liquido">Liquidos</option>
+                                <option value="solido_con">Solido Contable</option>
+                                <option value="solido_no_con">Solido no Contable</option>
                             </select>
                             {errors.category && <div className="invalid-feedback">{errors.category}</div>}
                         </div>

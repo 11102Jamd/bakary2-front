@@ -39,7 +39,7 @@ export const errorCreateUser = () => {
         title:"Error",
         text:"No se pudo crear el Usuario",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
     });
@@ -84,7 +84,7 @@ export const errorUpdateUser = () => {
         title:"Error",
         text:"No se pudo editar el Usuario",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
     });
@@ -127,7 +127,7 @@ export const errorDisableUser = () => {
         title:"Error",
         text:"No se pudo deshabilitar el Usuario",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {

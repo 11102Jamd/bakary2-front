@@ -39,7 +39,7 @@ export const errorCreateOrder = () => {
         title:"Error",
         text:"No se pudo crear la compra",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -60,7 +60,7 @@ export const errorShowDetails = () => {
         title:"Error",
         text:"No se puedo traer la compra con detalles",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -108,7 +108,7 @@ export const errorDeleteOrder = () => {
         title:"Error",
         text:"No se pudo eliminar la orden de compra",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {

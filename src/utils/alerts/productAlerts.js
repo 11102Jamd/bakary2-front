@@ -39,7 +39,7 @@ export const errorCreateProduct = () => {
         title:"Error",
         text:"No se pudo crear el producto",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -90,7 +90,7 @@ export const errorUpdateProduct = () => {
         title:"Error",
         text:"No se pudo actualizar insumo",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -142,7 +142,7 @@ export const errorSupplyProduct = () => {
         title:"Error",
         text:"No se pudo abastecer el producto",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -191,7 +191,7 @@ export const errorDisableProduct = () => {
         title:"Error",
         text:"No se pudo Inhabilitar el producto",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {

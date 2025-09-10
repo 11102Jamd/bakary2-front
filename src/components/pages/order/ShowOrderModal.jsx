@@ -105,7 +105,10 @@ function ShowOrder({ show, onHide, orderId }) {
                                                         <td>{batch.input?.name || `Insumo ID: ${batch.input_id}`}</td>
                                                         <td>{batch.quantity_total.toLocaleString()} {batch.unit}</td>
                                                         <td>${batch.unit_price?.toLocaleString() || '0'}</td>
-                                                        <td>${(batch.subtotal_price).toLocaleString()}</td>
+                                                        <td>${batch.subtotal_price.toLocaleString('es-CO',{
+                                                            minimumFractionDigits: 0,
+                                                            maximumFractionDigits: 0
+                                                        })}</td>
                                                     </tr>
                                                 ))
                                             ) : (
@@ -141,7 +144,7 @@ function ShowOrder({ show, onHide, orderId }) {
                                                         <tr key={index}>
                                                             <td>{batch.input?.name || `Insumo ID: ${batch.input_id}`}</td>
                                                             <td># {batch.batch_number || batch.id}</td>
-                                                            <td>{batch.quantity_remaining || batch.quantity_total} g</td>
+                                                            <td>{batch.quantity_remaining}{batch.unit_converted} - {batch.quantity_total}{batch.unit}</td>
                                                             <td>{batch.received_date ? new Date(batch.received_date).toLocaleDateString() : 'N/A'}</td>
                                                         </tr>
                                                     ))}

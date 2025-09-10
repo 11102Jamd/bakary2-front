@@ -39,7 +39,7 @@ export const errorCreateProduction = () => {
         title:"Error",
         text:"No se pudo crear la Produccion",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -60,7 +60,7 @@ export const errorShowDetailsProduction = () => {
         title:"Error",
         text:"No se puedo traer la produccion con detalles",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -108,7 +108,7 @@ export const errorDeleteProduction = () => {
         title:"Error",
         text:"No se pudo eliminar la produccion",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -160,7 +160,7 @@ export const errorProductionStock = (message) => {
         title:"Error",
         text:message,
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -178,7 +178,7 @@ export const errorProduction = (message) => {
         title:"Error",
         text:message,
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {

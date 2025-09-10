@@ -2,8 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { getRecipeDetails, updateRecipe } from "../../../api/recipe";
 import { errorUpdateRecipe, successUpdateRecipe } from "../../../utils/alerts/recipeAlert";
-import IngredientSelector from "./IngredientSelector";
-import RecipeItemsTable from "./RecipeItemsTable";
+import RecipeIngredientManager from "./RecipeIngredientManager";
 import LoadingModal from "../../Loading";
 
 function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
@@ -15,12 +14,12 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
 
     const [currentItem, setCurrentItem] = useState({
         input_id: '',
-        quantity_required: ''
+        quantity_required: '',
+        unit_used: ''
     });
 
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
-    const [inputs, setInputs] = useState([]);
 
     useEffect(() => {
         const fetchRecipeData = async () => {
@@ -32,6 +31,7 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
                 const transformedIngredients = recipeData.recipe_ingredients.map(ingredient => ({
                     input_id: ingredient.input_id,
                     quantity_required: parseFloat(ingredient.quantity_required),
+                    unit_used: ingredient.unit_used,
                     input_name: ingredient.input?.name || 'N/A'
                 }));
 
@@ -54,17 +54,15 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
     }, [recipeId]);
 
     const addItem = () => {
-        if (!currentItem.input_id || !currentItem.quantity_required) {
+        if (!currentItem.input_id || !currentItem.quantity_required || !currentItem.unit_used) {
             return;
         }
-
-        const selectedInput = inputs.find(input => input.id === parseInt(currentItem.input_id));
-        const inputName = selectedInput ? selectedInput.name : '';
 
         const newItem = {
             input_id: parseInt(currentItem.input_id),
             quantity_required: parseFloat(currentItem.quantity_required),
-            input_name: inputName
+            unit_used: currentItem.unit_used,
+            input_name: '' // Se llenará automáticamente desde el componente
         };
 
         setRecipe(prev => ({ 
@@ -74,7 +72,8 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
 
         setCurrentItem({
             input_id: '',
-            quantity_required: ''
+            quantity_required: '',
+            unit_used: ''
         });
     };
 
@@ -105,7 +104,8 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
                 yield_quantity: recipe.yield_quantity,
                 ingredients: recipe.ingredients.map(ingredient => ({
                     input_id: ingredient.input_id,
-                    quantity_required: ingredient.quantity_required
+                    quantity_required: ingredient.quantity_required,
+                    unit_used: ingredient.unit_used
                 }))
             };
 
@@ -163,17 +163,13 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
                             </div>
                         </div>
 
-                        {/* Selector de ingredientes */}
-                        <IngredientSelector 
-                            currentItem={currentItem}
-                            onItemChange={handleItemChange}
-                            onAddItem={addItem}
-                        />
-
-                        {/* Tabla de ingredientes de la receta */}
-                        <RecipeItemsTable 
+                        {/* Componente unificado de gestión de ingredientes */}
+                        <RecipeIngredientManager 
                             items={recipe.ingredients}
+                            onAddItem={addItem}
                             onRemoveItem={removeItem}
+                            currentItem={currentItem}
+                            onCurrentItemChange={handleItemChange}
                         />
                     </div>
                     <div className="modal-footer">
@@ -184,7 +180,7 @@ function EditRecipeModal({ recipeId, onClose, onRecipeUpdated }) {
                             onClick={handleSubmit}
                             disabled={recipe.ingredients.length === 0 || !recipe.name || !recipe.yield_quantity || saving}
                         >
-                            Actualizar Receta
+                            {saving ? 'Actualizando...' : 'Actualizar Receta'}
                         </button>
                         <button type="button" className="btn btn-secondary" onClick={onClose} disabled={saving}>
                             Cancelar

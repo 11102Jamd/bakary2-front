@@ -39,7 +39,7 @@ export const errorCreateSale = () => {
         title:"Error",
         text:"No se pudo crear la venta",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -60,7 +60,7 @@ export const errorShowDetailsSale = () => {
         title:"Error",
         text:"No se puedo traer la venta con detalles",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -108,7 +108,7 @@ export const errorDeleteSale = () => {
         title:"Error",
         text:"No se pudo eliminar la venta",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {

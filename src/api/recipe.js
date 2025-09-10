@@ -41,3 +41,14 @@ export const updateRecipe = async (id, recipeData) => {
         throw error;
     };
 };
+
+
+export const disableRecipe = async(id) => {
+    try {
+        const response = await api.patch(`/recipe/${id}/disable`);
+        return response.data;
+    } catch (error) {
+        console.error("error al inhabilitar la receta", error);
+        throw error;
+    };
+}

@@ -39,7 +39,7 @@ export const errorCreateInput = () => {
         title:"Error",
         text:"No se pudo crear el insumo",
         icon:"error",
-        background:"#e6fff5",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -90,7 +90,7 @@ export const errorUpdateInput = () => {
         title:"Error",
         text:"No se pudo actualizar insumo",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {
@@ -138,7 +138,7 @@ export const errorDisableInput = () => {
         title:"Error",
         text:"No se pudo Inhabilitar el insumo",
         icon:"error",
-        background:"#Afffff",
+        background:"#fff",
         color:"#220900",
         width :'350px',
         customClass: {

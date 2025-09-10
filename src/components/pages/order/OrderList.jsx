@@ -60,7 +60,10 @@ function Order(){
         },
         {
             name: 'Total',
-            selector: row => `$${row.order_total} COP`,
+            selector: row => `$${parseFloat(row.order_total).toLocaleString('es-CO', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            })} COP`,
             sortable: true,
             center:"true"
         },

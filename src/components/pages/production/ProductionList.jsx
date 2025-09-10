@@ -56,13 +56,19 @@ function Production(){
         },
         {
             name: 'Precio por Producto',
-            selector: row => `$${row.price_for_product} COP`,
+            selector: row => `$${parseFloat(row.price_for_product).toLocaleString('es-CO',{
+                minimumFractionDigits:0,
+                maximumFractionDigits:0
+            })} COP`,
             sortable: true,
             center: "true"
         },
         {
             name: 'Costo de Produccion',
-            selector: row => `$${row.total_cost} COP`,
+            selector: row => `$${parseFloat(row.total_cost).toLocaleString('es-CO',{
+                minimumFractionDigits:0,
+                maximumFractionDigits:0
+            })} COP`,
             sortable: true,
             center: "true"
         },

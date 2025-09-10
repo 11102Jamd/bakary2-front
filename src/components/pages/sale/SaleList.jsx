@@ -62,7 +62,10 @@ function Sale(){
         },
         {
             name: 'Total',
-            selector: row => `$${row.sale_total?.toLocaleString() || '0'}`,
+            selector: row => `$${parseFloat(row.sale_total).toLocaleString('es-CO',{
+                minimumFractionDigits:0,
+                maximumFractionDigits:0
+            })} COP`,
             sortable: true,
         },
         {
