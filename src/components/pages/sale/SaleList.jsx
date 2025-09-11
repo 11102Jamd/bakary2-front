@@ -7,8 +7,13 @@ import DataTable from "react-data-table-component";
 import CreateSaleModal from "./CreateSaleModal";
 import ShowSale from "./ShowSaleModal";
 import { errorDeleteSale, showConfirmDeleteSale, successDeleteSale } from "../../../utils/alerts/saleAlerts";
+import { useAuth } from "../../context/AuthContext";
 
 function Sale(){
+    const {user} = useAuth();
+
+    if (!user) return null;
+
     const [sale, setSale] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [saleSelected, setSaleSelected] = useState(null);
@@ -77,14 +82,17 @@ function Sale(){
             name: 'Acciones',
             cell: row => (
                 <div className="btn-group" role="group">
-                    <button 
-                        onClick={() => handleDeleteSale(row.id)}
-                        className='btn btn-danger btn-sm rounded-2 p-2'
-                        style={{background:'#D6482D'}}
-                        title="Eliminar"
-                    >
-                        <i className="bi bi-trash fs-6"></i>
-                    </button>
+                    {user.rol === 'Administrador' && (
+                        <button 
+                            onClick={() => handleDeleteSale(row.id)}
+                            className='btn btn-danger btn-sm rounded-2 p-2'
+                            style={{background:'#D6482D'}}
+                            title="Eliminar"
+                        >
+                            <i className="bi bi-trash fs-6"></i>
+                        </button>
+                    )}
+                    
                     <button 
                         onClick={() => setSaleSelected(row)} 
                         className='btn btn-info btn-sm ms-2 rounded-2 p-2'

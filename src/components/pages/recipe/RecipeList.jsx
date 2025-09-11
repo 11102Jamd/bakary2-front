@@ -8,9 +8,14 @@ import CreateRecipeModal from "./CreateRecipeModal";
 import ShowRecipeModal from "./ShowRecipeModal";
 import EditRecipeModal from "./EditRecipeModal";
 import { errorDisableRecipe, showConfirmDisableRecipe, successDisableRecipe } from "../../../utils/alerts/recipeAlert";
+import { useAuth } from "../../context/AuthContext";
 
 
 function Recipe(){
+    const {user} = useAuth();
+
+    if (!user) return null;
+
     const [recipe, setRecipe] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [recipeSelected, setRecipeSelected] = useState(null);
@@ -63,13 +68,15 @@ function Recipe(){
             name: 'Acciones',
             cell: row => (
                 <div className="btn-group" role="group">
-                    <button 
-                        onClick={() => handleDisableRecipe(row.id)}
-                        className='btn btn-warning btn-sm rounded-2 p-2'
-                        title="Eliminar"
-                    >
-                        <i className="bi bi-trash fs-6"></i>
-                    </button>
+                    {user.rol === 'Administrador' && (
+                        <button 
+                            onClick={() => handleDisableRecipe(row.id)}
+                            className='btn btn-warning btn-sm rounded-2 p-2'
+                            title="Inhabilitar"
+                        >
+                            <i className="bi bi-trash fs-6"></i>
+                        </button>
+                    )}
                     <button 
                         onClick={() => setRecipeSelected(row)} 
                         className='btn btn-info btn-sm ms-2 rounded-2 p-2'

@@ -7,8 +7,13 @@ import { disableInput, getInput } from "../../../api/input";
 import CreateInputModal from "./CreateInputModal";
 import EditInputModal from "./EditInputModal";
 import { errorDisableInput, showConfirmDisableInput, successDisableInput } from "../../../utils/alerts/inputAlerts";
+import { useAuth } from "../../context/AuthContext";
 
 function Input(){
+    const {user} = useAuth();
+
+    if (!user) return null;
+
     const [input, setInput] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [inputSelected, setInputSelected] = useState(null);
@@ -57,7 +62,7 @@ function Input(){
             name:'Categoria',
             selector: row => row.category,
             sortable: true,
-            center: true
+            center: "true"
         },
         {
             name: "Stock Actual",
@@ -96,13 +101,15 @@ function Input(){
             name: 'Acciones',
             cell: row => (
                 <div className="btn-group" role="group">
-                    <button 
-                        onClick={() => handleDisableInput(row.id)} 
-                        className='btn btn-warning btn-sm rounded-2 p-2'
-                        title="Inhabilitar"
-                    >
-                        <i className="bi bi-lock-fill"></i>  
-                    </button>
+                    {user.rol === 'Administrador' && (
+                        <button 
+                            onClick={() => handleDisableInput(row.id)} 
+                            className='btn btn-warning btn-sm rounded-2 p-2'
+                            title="Inhabilitar"
+                        >
+                            <i className="bi bi-lock-fill"></i>  
+                        </button>
+                    )}
 
                     <button 
                         onClick={() => { setInputSelected(row);}} 
@@ -115,7 +122,7 @@ function Input(){
                 </div>
             ),
             ignoreRowClick: true,
-            center:"true"
+            center: "true"
         }
     ];
 

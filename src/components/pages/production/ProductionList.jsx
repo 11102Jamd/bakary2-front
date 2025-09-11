@@ -7,8 +7,13 @@ import { deleteProduction, getProduction } from "../../../api/production";
 import CreateProductionModal from "./CreateProductionModal";
 import ShowProductionDetails from "./ShowProductionDetails";
 import { errorDeleteProduction, showConfirmDeleteProduction, successDeleteProduction } from "../../../utils/alerts/productionAlerts";
+import { useAuth } from "../../context/AuthContext";
 
 function Production(){
+    const {user} = useAuth();
+
+    if(!user) return null;
+
     const [production, setProduction] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [productionSelected, setProductionSelected] = useState(null);
@@ -82,14 +87,17 @@ function Production(){
             name: 'Accion',
             cell: row => (
                 <div className="btn-group" role="group">
-                    <button 
-                        onClick={() => handleDeleteProduction(row.id)}
-                        className='btn btn-danger btn-sm rounded-2 p-2'
-                        style={{background:'#D6482D'}}
-                        title="Eliminar"
-                    >
-                        <i className="bi bi-trash fs-6"></i>
-                    </button>
+                    {user.rol === 'Administrador' && (
+                        <button 
+                            onClick={() => handleDeleteProduction(row.id)}
+                            className='btn btn-danger btn-sm rounded-2 p-2'
+                            style={{background:'#D6482D'}}
+                            title="Eliminar"
+                        >
+                            <i className="bi bi-trash fs-6"></i>
+                        </button>
+                    )}
+                    
                     <button 
                         onClick={() => setProductionSelected(row)} 
                         className='btn btn-info btn-sm ms-2 rounded-2 p-2'

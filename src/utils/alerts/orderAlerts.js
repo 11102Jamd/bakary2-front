@@ -34,10 +34,10 @@ export const successCreateOrder = () => {
     });
 };
 
-export const errorCreateOrder = () => {
+export const errorCreateOrder = (message) => {
     return Swal.fire({
         title:"Error",
-        text:"No se pudo crear la compra",
+        text: message,
         icon:"error",
         background:"#fff",
         color:"#220900",

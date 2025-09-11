@@ -7,8 +7,13 @@ import DataTable from "react-data-table-component";
 import CreateOrderModal from "./CreateOrderModal";
 import ShowOrder from "./ShowOrderModal"; // Importar el componente
 import { errorDeleteOrder, showConfirmDeleteOrder, successDeleteOrder } from "../../../utils/alerts/orderAlerts";
+import { useAuth } from "../../context/AuthContext";
 
 function Order(){
+    const {user} = useAuth();
+
+    if (!user) return null;
+
     const [order, setOrder] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [orderSelected, setOrderSelected] = useState(null);
@@ -77,14 +82,17 @@ function Order(){
             name: 'Acciones',
             cell: row => (
                 <div className="btn-group" role="group">
-                    <button 
-                        onClick={() => handleDeleteOrder(row.id)}
-                        className='btn btn-danger btn-sm rounded-2 p-2'
-                        style={{background:'#D6482D'}}
-                        title="Eliminar"
-                    >
-                        <i className="bi bi-trash fs-6"></i>
-                    </button>
+                    {user.rol === 'Administrador' && (
+                        <button 
+                            onClick={() => handleDeleteOrder(row.id)}
+                            className='btn btn-danger btn-sm rounded-2 p-2'
+                            style={{background:'#D6482D'}}
+                            title="Eliminar"
+                        >
+                            <i className="bi bi-trash fs-6"></i>
+                        </button>
+                    )}
+                    
                     <button 
                         onClick={() => setOrderSelected(row)} 
                         className='btn btn-info btn-sm ms-2 rounded-2 p-2'

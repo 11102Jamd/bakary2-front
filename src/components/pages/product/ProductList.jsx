@@ -8,8 +8,13 @@ import CreateProductModal from "./CreateProductModal";
 import EditProductModal from "./EditProductModal";
 import SupplyProductModal from "./SupplyProductModal";
 import { errorDisableProduct, showConfirmDisableProduct, successDisableProduct } from "../../../utils/alerts/productAlerts";
+import { useAuth } from "../../context/AuthContext";
 
 function Product(){
+    const {user} = useAuth();
+
+    if (!user) return null;
+
     const [product, setProduct] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showSupplyModal, setShowSupplyModal] = useState(false);
@@ -102,13 +107,15 @@ function Product(){
             name: 'Accion',
             cell: row => (
                 <div className="btn-group" role="group">
-                    <button
-                    onClick={() => { handleDisableProduct(row.id)}}
-                        className="btn btn-warning btn-sm rounded-2 p-2"
-                        title="eliminar"
-                    >
-                        <i className="bi bi-lock-fill"></i> 
-                    </button>
+                    {user.rol === 'Administrador' && (
+                        <button
+                            onClick={() => { handleDisableProduct(row.id)}}
+                            className="btn btn-warning btn-sm rounded-2 p-2"
+                            title="eliminar"
+                        >
+                            <i className="bi bi-lock-fill"></i> 
+                        </button>
+                    )}
 
                     <button
                         onClick={()=> { setProductSelected(row);}}
@@ -119,17 +126,19 @@ function Product(){
                         <i className="bi bi-pencil-square fs-6"></i>
                     </button>
                     
-                    <button
-                        onClick={()=> {
-                            setProductSelected(row);
-                            setShowSupplyModal(true);
-                        }}
-                        className="btn btn-primary btn-sm ms-2 rounded-2 p-2"
-                        style={{background:'#2DEACD'}}
-                        title="Abastecer"
-                    >
-                        <i className="bi bi-plus"></i>    
-                    </button>
+                    {user.rol === 'Administrador' || user.rol === 'Panadero' && (
+                        <button
+                            onClick={()=> {
+                                setProductSelected(row);
+                                setShowSupplyModal(true);
+                            }}
+                            className="btn btn-primary btn-sm ms-2 rounded-2 p-2"
+                            style={{background:'#2DEACD'}}
+                            title="Abastecer"
+                        >
+                            <i className="bi bi-plus"></i>    
+                        </button>
+                    )}
                 </div>
             ),
             ignoreRowClick: true,

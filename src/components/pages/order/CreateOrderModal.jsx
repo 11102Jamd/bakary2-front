@@ -21,6 +21,7 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
 
     const [loading, setLoading] = useState(false);
     const [inputs, setInputs] = useState([]); // ← Estado local para insumos
+    const [error, setError] = useState('');
 
     // Cargar insumos solo una vez
     useEffect(() => {
@@ -85,9 +86,22 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
             await successCreateOrder();
             onOrderCreated?.();
             onClose();
-        } catch (error) {
-            console.error("Error al crear orden:", error);
-            await errorCreateOrder(error.response?.data?.message || error.message);
+        } catch (err) {
+            let errorMessage = 'Error al crear la compra';
+        
+            if (err.response?.data) {
+                const data = err.response.data;
+                
+                if (data.errors) {
+                    const firstErrorKey = Object.keys(data.errors)[0];
+                    errorMessage = data.errors[firstErrorKey][0];
+                } else {
+                    errorMessage = data.message || data.error || errorMessage;
+                }
+            }
+                        
+            setError(errorMessage);
+            await errorCreateOrder(errorMessage);
         } finally {
             setLoading(false);
         }
