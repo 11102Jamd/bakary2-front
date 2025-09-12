@@ -8,6 +8,7 @@ import CreateInputModal from "./CreateInputModal";
 import EditInputModal from "./EditInputModal";
 import { errorDisableInput, showConfirmDisableInput, successDisableInput } from "../../../utils/alerts/inputAlerts";
 import { useAuth } from "../../context/AuthContext";
+import NumberFormatter from "../../NumberFormatter";
 
 function Input(){
     const {user} = useAuth();
@@ -83,10 +84,7 @@ function Input(){
             name: "Precio Actual",
             selector: row => {
                 const price = parseFloat(getCurrentBatch(row)?.unit_price);
-                return isNaN(price) ? "N/A" : `$${parseFloat(price).toLocaleString('es-CO',{
-                    minimumFractionDigits:0,
-                    maximumFractionDigits:0
-                })} COP`;
+                return isNaN(price) ? "N/A" : <NumberFormatter value={price} prefix="$" suffix="COP"/>;
             },
             sortable: true,
             center: "true",

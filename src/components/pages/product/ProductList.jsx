@@ -9,6 +9,7 @@ import EditProductModal from "./EditProductModal";
 import SupplyProductModal from "./SupplyProductModal";
 import { errorDisableProduct, showConfirmDisableProduct, successDisableProduct } from "../../../utils/alerts/productAlerts";
 import { useAuth } from "../../context/AuthContext";
+import NumberFormatter from "../../NumberFormatter";
 
 function Product(){
     const {user} = useAuth();
@@ -62,12 +63,13 @@ function Product(){
         },
         {
             name: 'Precio Unidad',
-            selector: row => `$${parseFloat(row.unit_price).toLocaleString('es-CO',{
-                minimumFractionDigits:0,
-                maximumFractionDigits:0
-            })} COP`,
             sortable: true,
-            center: "true"
+            center: "true",
+            cell: row => {
+                return(
+                    <NumberFormatter value={row.unit_price} prefix="$" suffix="COP"/>
+                );
+            }
         },
         {
             name: 'Stock Actual',
@@ -126,7 +128,7 @@ function Product(){
                         <i className="bi bi-pencil-square fs-6"></i>
                     </button>
                     
-                    {user.rol === 'Administrador' || user.rol === 'Panadero' && (
+                    {(user.rol === 'Administrador' || user.rol === 'Panadero') && (
                         <button
                             onClick={()=> {
                                 setProductSelected(row);

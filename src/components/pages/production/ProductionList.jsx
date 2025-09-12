@@ -8,6 +8,7 @@ import CreateProductionModal from "./CreateProductionModal";
 import ShowProductionDetails from "./ShowProductionDetails";
 import { errorDeleteProduction, showConfirmDeleteProduction, successDeleteProduction } from "../../../utils/alerts/productionAlerts";
 import { useAuth } from "../../context/AuthContext";
+import NumberFormatter from "../../NumberFormatter";
 
 function Production(){
     const {user} = useAuth();
@@ -61,21 +62,23 @@ function Production(){
         },
         {
             name: 'Precio por Producto',
-            selector: row => `$${parseFloat(row.price_for_product).toLocaleString('es-CO',{
-                minimumFractionDigits:0,
-                maximumFractionDigits:0
-            })} COP`,
             sortable: true,
-            center: "true"
+            center: "true",
+            cell: row => {
+                return(
+                    <NumberFormatter value={row.price_for_product} prefix="$"/>
+                );
+            }
         },
         {
             name: 'Costo de Produccion',
-            selector: row => `$${parseFloat(row.total_cost).toLocaleString('es-CO',{
-                minimumFractionDigits:0,
-                maximumFractionDigits:0
-            })} COP`,
             sortable: true,
-            center: "true"
+            center: "true",
+            cell: row => {
+                return(
+                    <NumberFormatter value={row.total_cost} prefix="$" suffix="COP"/>
+                );
+            }
         },
         {
             name: 'Fecha de Produccion',

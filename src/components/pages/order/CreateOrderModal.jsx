@@ -4,6 +4,7 @@ import { successCreateOrder, errorCreateOrder } from '../../../utils/alerts/orde
 import InputSelector from './InputSelector';
 import OrderItemsTable from './OrderItemsTable';
 import { getInput } from '../../../api/input'; // ← Importa la función
+import { validateName } from '../../../utils/validations/validationFields';
 
 function CreateOrderModal({ onClose, onOrderCreated }) {
     const [order, setOrder] = useState({
@@ -21,7 +22,7 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
 
     const [loading, setLoading] = useState(false);
     const [inputs, setInputs] = useState([]); // ← Estado local para insumos
-    const [error, setError] = useState('');
+    const [errors, setErrors] = useState({});
 
     // Cargar insumos solo una vez
     useEffect(() => {
@@ -68,7 +69,22 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
     };
 
     const handleOrderChange = (e) => {
-        setOrder({ ...order, [e.target.name]: e.target.value });
+        const { id, value } = e.target;
+
+        setOrder(prev => ({ ...prev, [id]: value }));
+        
+        let error = null;
+
+        switch(id) {
+
+            case 'supplier_name':
+                error = validateName(value, 'El nombre de la Receta');
+                break;
+
+            default:
+                break;
+        }
+        setErrors(prev => ({ ...prev, [id]: error }));
     };
 
     const handleItemChange = (e) => {
@@ -86,22 +102,9 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
             await successCreateOrder();
             onOrderCreated?.();
             onClose();
-        } catch (err) {
-            let errorMessage = 'Error al crear la compra';
-        
-            if (err.response?.data) {
-                const data = err.response.data;
-                
-                if (data.errors) {
-                    const firstErrorKey = Object.keys(data.errors)[0];
-                    errorMessage = data.errors[firstErrorKey][0];
-                } else {
-                    errorMessage = data.message || data.error || errorMessage;
-                }
-            }
-                        
-            setError(errorMessage);
+        } catch (error) {
             await errorCreateOrder(errorMessage);
+            console.error("Error al generar la orden de compra", error);
         } finally {
             setLoading(false);
         }
@@ -116,18 +119,21 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
                         <button type="button" className="btn-close btn-close-white" onClick={onClose}></button>
                     </div>
                     <div className="modal-body">
+                        <br />
+                        <p>Todos los campos que tengan * son requeridos</p>
                         {/* Selección de proveedor */}
                         <div className="mb-4">
                             <label htmlFor="supplier_name" className="form-label">Proveedor *</label>
                             <input
                                 type="text"
-                                className="form-control"
+                                className={`form-control ${errors.supplier_name ? 'is-invalid' : ''}`}
                                 id="supplier_name"
                                 name="supplier_name"
                                 value={order.supplier_name}
                                 onChange={handleOrderChange}
                                 required
                             />
+                            {errors.supplier_name && <div className="invalid-feedback">{errors.supplier_name}</div>}
                         </div>
 
                         {/* Selector de insumos */}

@@ -8,6 +8,7 @@ import CreateSaleModal from "./CreateSaleModal";
 import ShowSale from "./ShowSaleModal";
 import { errorDeleteSale, showConfirmDeleteSale, successDeleteSale } from "../../../utils/alerts/saleAlerts";
 import { useAuth } from "../../context/AuthContext";
+import NumberFormatter from "../../NumberFormatter";
 
 function Sale(){
     const {user} = useAuth();
@@ -54,29 +55,35 @@ function Sale(){
         {
             name:'Venta N°',
             selector: row => row.id,
+            center: "true"
         },
         {
             name: 'Vendedor',
             selector: row => row.user?.name ?? 'N/A',
             sortable: true,
+            center: "true"
         },
         {
             name: 'Fecha de Venta',
             selector: row => row.sale_date ?? 'N/A',
             sortable: true,
+            center: "true"
         },
         {
             name: 'Total',
-            selector: row => `$${parseFloat(row.sale_total).toLocaleString('es-CO',{
-                minimumFractionDigits:0,
-                maximumFractionDigits:0
-            })} COP`,
             sortable: true,
+            center: "true",
+            cell: row => {
+                return (
+                    <NumberFormatter value={row.sale_total} prefix="$" suffix="COP"/>
+                );
+            }
         },
         {
             name: 'Cant. Productos',
             selector: row => row.sale_products ? row.sale_products.length : 0,
             sortable: true,
+            center: "true"
         },
         {
             name: 'Acciones',
@@ -103,6 +110,7 @@ function Sale(){
                 </div>
             ),
             ignoreRowClick: true,
+            center: "true"
         },
     ];
 

@@ -8,6 +8,7 @@ import CreateOrderModal from "./CreateOrderModal";
 import ShowOrder from "./ShowOrderModal"; // Importar el componente
 import { errorDeleteOrder, showConfirmDeleteOrder, successDeleteOrder } from "../../../utils/alerts/orderAlerts";
 import { useAuth } from "../../context/AuthContext";
+import NumberFormatter from "../../NumberFormatter";
 
 function Order(){
     const {user} = useAuth();
@@ -65,12 +66,13 @@ function Order(){
         },
         {
             name: 'Total',
-            selector: row => `$${parseFloat(row.order_total).toLocaleString('es-CO', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            })} COP`,
             sortable: true,
-            center:"true"
+            center:"true",
+            cell: row => {
+                return(
+                    <NumberFormatter value={row.order_total} prefix="$" suffix="COP"/>
+                );
+            }
         },
         {
             name: 'Cant. Items',

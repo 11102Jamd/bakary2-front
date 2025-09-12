@@ -29,6 +29,11 @@ function RecipeIngredientManager({
 
     const selectedInput = inputs.find(input => input.id === parseInt(currentItem?.input_id || ''));
 
+    const getInputName = (inputId) => {
+        const input =  inputs.find(input => input.id === parseInt(inputId));
+        return input ? input.name : 'N/A'
+    }
+
     if (loading) {
         return (
             <div className="card mb-4">
@@ -145,7 +150,7 @@ function RecipeIngredientManager({
                                 {items.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.input_id}</td>
-                                        <td>{item.input_name || 'N/A'}</td>
+                                        <td>{getInputName(item.input_id)}</td>
                                         <td>{item.quantity_required}</td>
                                         <td>{item.unit_used}</td>
                                         <td>

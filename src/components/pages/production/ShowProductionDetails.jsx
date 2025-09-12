@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getProductionDetails } from "../../../api/production";
 import { errorShowDetailsProduction } from "../../../utils/alerts/productionAlerts";
+import NumberFormatter from "../../NumberFormatter";
 
 function ShowProductionDetails({ show, onHide, productionId }) {
     const [production, setProduction] = useState(null);
@@ -83,8 +84,8 @@ function ShowProductionDetails({ show, onHide, productionId }) {
                                         </div>
                                         <div className="col-md-6">
                                             <p><strong>Cantidad Producida:</strong> {production.quantity_to_produce?.toLocaleString() || '0'} unidades</p>
-                                            <p><strong>Costo Total:</strong> ${production.total_cost?.toLocaleString() || '0'}</p>
-                                            <p><strong>Costo por Unidad:</strong> ${(production.total_cost / production.quantity_to_produce)?.toFixed(3) || '0'}</p>
+                                            <p><strong>Costo Total:</strong><NumberFormatter value={production.total_cost}/></p>
+                                            <p><strong>Costo por Unidad:</strong> ${(production.total_cost / production.quantity_to_produce)?.toFixed(0) || '0'}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -106,10 +107,10 @@ function ShowProductionDetails({ show, onHide, productionId }) {
                                                 production.consumptions.map((consumption, index) => (
                                                     <tr key={index}>
                                                         <td>{consumption.input?.name || `Insumo ID: ${consumption.input_id}`}</td>
-                                                        <td>{consumption.quantity_used?.toLocaleString()} {consumption.batch?.unit_converted}</td>
-                                                        <td>${consumption.batch?.unit_price.toLocaleString() || '0'}</td>
+                                                        <td>{<NumberFormatter value={consumption.quantity_used}/>} {consumption.batch?.unit_converted}</td>
+                                                        <td><NumberFormatter value={consumption.batch?.unit_price} prefix="$"/></td>
                                                         <td>{consumption.batch?.batch_number || 'N/A'}</td>
-                                                        <td>${consumption.total_cost?.toLocaleString() || '0'}</td>
+                                                        <td><NumberFormatter value={consumption.total_cost} prefix="$"/></td>
                                                     </tr>
                                                 ))
                                             ) : (
@@ -121,7 +122,7 @@ function ShowProductionDetails({ show, onHide, productionId }) {
                                         <tfoot className="table-light">
                                             <tr>
                                                 <td colSpan="4" className="text-end fw-bold">Costo Total de Producción:</td>
-                                                <td className="fw-bold">${production.total_cost?.toLocaleString() || '0'}</td>
+                                                <td className="fw-bold"><NumberFormatter value={production.total_cost} prefix="$" suffix="COP"/></td>
                                             </tr>
                                         </tfoot>
                                     </table>

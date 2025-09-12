@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getSaleDetails } from "../../../api/sale";
 import { errorShowDetailsSale } from "../../../utils/alerts/saleAlerts";
+import NumberFormatter from "../../NumberFormatter";
 
 function ShowSale({ show, onHide, saleId }) {
     const [sale, setSale] = useState(null);
@@ -82,7 +83,7 @@ function ShowSale({ show, onHide, saleId }) {
                                             <p><strong>Fecha de Venta:</strong> {new Date(sale.sale_date).toLocaleDateString()}</p>
                                         </div>
                                         <div className="col-md-6">
-                                            <p><strong>Total de la Venta:</strong> ${sale.sale_total?.toLocaleString() || '0'}</p>
+                                            <p><strong>Total de la Venta:</strong><NumberFormatter value={sale.sale_total} prefix="$" suffix="COP"/></p>
                                         </div>
                                     </div>
                                 </div>
@@ -103,9 +104,9 @@ function ShowSale({ show, onHide, saleId }) {
                                                 sale.sale_products.map((saleProduct, index) => (
                                                     <tr key={index}>
                                                         <td>{saleProduct.product?.name || `Producto ID: ${saleProduct.product_id}`}</td>
-                                                        <td>{saleProduct.quantity_requested.toLocaleString()}</td>
-                                                        <td>${saleProduct.product?.unit_price?.toLocaleString() || '0'}</td>
-                                                        <td>${(saleProduct.subtotal_price).toLocaleString()}</td>
+                                                        <td><NumberFormatter value={saleProduct.quantity_requested}/></td>
+                                                        <td><NumberFormatter value={saleProduct.product?.unit_price} prefix="$"/></td>
+                                                        <td><NumberFormatter value={saleProduct.subtotal_price} prefix="$"/></td>
                                                     </tr>
                                                 ))
                                             ) : (
@@ -117,7 +118,7 @@ function ShowSale({ show, onHide, saleId }) {
                                         <tfoot className="table-light">
                                             <tr>
                                                 <td colSpan="3" className="text-end fw-bold">Total:</td>
-                                                <td className="fw-bold">${sale.sale_total?.toLocaleString() || '0'}</td>
+                                                <td className="fw-bold"><NumberFormatter value={sale.sale_total} prefix="$" suffix="COP"/></td>
                                             </tr>
                                         </tfoot>
                                     </table>

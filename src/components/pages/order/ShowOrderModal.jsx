@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getOrderDetails } from "../../../api/order";
 import { errorShowDetails } from "../../../utils/alerts/orderAlerts";
+import NumberFormatter from "../../NumberFormatter";
 
 function ShowOrder({ show, onHide, orderId }) {
     const [order, setOrder] = useState(null);
@@ -82,7 +83,7 @@ function ShowOrder({ show, onHide, orderId }) {
                                             <p><strong>Fecha de Orden:</strong> {new Date(order.order_date).toLocaleDateString()}</p>
                                         </div>
                                         <div className="col-md-6">
-                                            <p><strong>Total de la Orden:</strong> ${order.order_total?.toLocaleString() || '0'}</p>
+                                            <p><strong>Total de la Orden:</strong><NumberFormatter value={order.order_total} prefix="$" suffix="COP"/></p>
                                         </div>
                                     </div>
                                 </div>
@@ -103,12 +104,9 @@ function ShowOrder({ show, onHide, orderId }) {
                                                 order.batches.map((batch, index) => (
                                                     <tr key={index}>
                                                         <td>{batch.input?.name || `Insumo ID: ${batch.input_id}`}</td>
-                                                        <td>{batch.quantity_total.toLocaleString()} {batch.unit}</td>
-                                                        <td>${batch.unit_price?.toLocaleString() || '0'}</td>
-                                                        <td>${batch.subtotal_price.toLocaleString('es-CO',{
-                                                            minimumFractionDigits: 0,
-                                                            maximumFractionDigits: 0
-                                                        })}</td>
+                                                        <td>{<NumberFormatter value={batch.quantity_total}/>} {batch.unit}</td>
+                                                        <td><NumberFormatter value={batch.unit_price} prefix="$" suffix="COP"/></td>
+                                                        <td><NumberFormatter value={batch.subtotal_price} prefix="$" suffix="COP"/></td>
                                                     </tr>
                                                 ))
                                             ) : (
@@ -120,7 +118,7 @@ function ShowOrder({ show, onHide, orderId }) {
                                         <tfoot className="table-light">
                                             <tr>
                                                 <td colSpan="3" className="text-end fw-bold">Total:</td>
-                                                <td className="fw-bold">${order.order_total?.toLocaleString() || '0'}</td>
+                                                <td className="fw-bold"><NumberFormatter value={order.order_total} prefix="$" suffix="COP"/></td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -144,7 +142,7 @@ function ShowOrder({ show, onHide, orderId }) {
                                                         <tr key={index}>
                                                             <td>{batch.input?.name || `Insumo ID: ${batch.input_id}`}</td>
                                                             <td># {batch.batch_number || batch.id}</td>
-                                                            <td>{batch.quantity_remaining}{batch.unit_converted} - {batch.quantity_total}{batch.unit}</td>
+                                                            <td>{<NumberFormatter value={batch.quantity_remaining}/>} {batch.unit_converted} - {batch.quantity_total} {batch.unit}</td>
                                                             <td>{batch.received_date ? new Date(batch.received_date).toLocaleDateString() : 'N/A'}</td>
                                                         </tr>
                                                     ))}
