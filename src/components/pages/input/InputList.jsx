@@ -75,7 +75,7 @@ function Input(){
                 const unit = batch?.unit_converted || "";
                 return (
                     <div className={`text-center ${stock === 0 ? "text-danger fw-bold" : ""}`}>
-                        {stock.toFixed(2)} {unit}
+                        <NumberFormatter value={stock}/> {unit}
                     </div>
                 );
             }
