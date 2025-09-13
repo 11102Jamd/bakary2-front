@@ -134,7 +134,7 @@ function Product(){
                                 setProductSelected(row);
                                 setShowSupplyModal(true);
                             }}
-                            className="btn btn-primary btn-sm ms-2 rounded-2 p-2"
+                            className="btn btn-success btn-sm ms-2 rounded-2 p-2"
                             style={{background:'#2DEACD'}}
                             title="Abastecer"
                         >
@@ -157,12 +157,14 @@ function Product(){
                 
                 <div className='card-body p-4'>
                     <div className='d-flex justify-content-between mb-3'>
-                        <button
-                            onClick={() => setShowModal(true)}
-                            className='btn btn-success'
-                        >
-                            <i className='bi bi-plus-circle'></i> Crear Producto
-                        </button>
+                        {(user.rol === 'Administrador' || user.rol === 'Panadero') && (
+                            <button
+                                onClick={() => setShowModal(true)}
+                                className='btn btn-success'
+                            >
+                                <i className='bi bi-plus-circle'></i> Crear Producto
+                            </button>
+                        )}
                     </div>
 
                     <DataTable

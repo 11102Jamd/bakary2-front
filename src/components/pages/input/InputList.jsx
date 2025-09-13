@@ -133,12 +133,14 @@ function Input(){
 
                 <div className='card-body p-4'>
                     <div className='d-flex justify-content-between mb-3'>
-                        <button 
-                            onClick={() => setShowModal(true)} 
-                            className='btn btn-success'
-                        >
-                            <i className="bi bi-plus-circle"></i> Crear Insumo
-                        </button>
+                        {(user.rol === 'Administrador' || user.rol === 'Panadero') && (
+                            <button 
+                                onClick={() => setShowModal(true)} 
+                                className='btn btn-success'
+                            >
+                                <i className="bi bi-plus-circle"></i> Crear Insumo
+                            </button>
+                        )}
                     </div>
 
                     <DataTable
