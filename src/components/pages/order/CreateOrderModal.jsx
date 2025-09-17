@@ -16,15 +16,14 @@ function CreateOrderModal({ onClose, onOrderCreated }) {
     const [currentItem, setCurrentItem] = useState({
         input_id: '',
         quantity_total: '',
-        unit: '', // ← Asegúrate de incluir unit aquí
+        unit: '',
         unit_price: ''
     });
 
     const [loading, setLoading] = useState(false);
-    const [inputs, setInputs] = useState([]); // ← Estado local para insumos
+    const [inputs, setInputs] = useState([]);
     const [errors, setErrors] = useState({});
 
-    // Cargar insumos solo una vez
     useEffect(() => {
         const fetchInputs = async () => {
             try {

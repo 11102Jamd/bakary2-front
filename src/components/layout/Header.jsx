@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import profileImage from "../../assets/Foto.png";
 import '../../App.css';
 
 function Header() {
@@ -24,7 +25,7 @@ function Header() {
     return (
         <header className="header">
             <div className="header-content">
-                <h1 className="h4 mb-0">Pan de Yuca Que Rico</h1>
+                <img src={profileImage} alt="logo" style={{ width: '100px', height: '30px', borderRadius: '0%', marginRight: '50px' }}/>
                 <div className="user-info">
                 <div className="dropdown">
                         <button 

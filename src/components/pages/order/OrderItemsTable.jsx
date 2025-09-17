@@ -1,6 +1,6 @@
 import React from "react";
 
-function OrderItemsTable({ items, onRemoveItem, inputs }) { // ← Agrega 'inputs' como prop
+function OrderItemsTable({ items, onRemoveItem, inputs }) { 
     const getInputById = (id) => {
         return inputs.find(input => input.id === id);
     };

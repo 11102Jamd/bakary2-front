@@ -16,16 +16,15 @@ function Product(){
 
     if (!user) return null;
 
-    const [product, setProduct] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [showSupplyModal, setShowSupplyModal] = useState(false);
-    const [productSelected, setProductSelected] = useState(null);
-    const [pending, setPending] = useState(true);
+    const [product, setProduct] = useState([]); // almacena la lista de productos
+    const [showModal, setShowModal] = useState(false); // control del modal de creacion
+    const [showSupplyModal, setShowSupplyModal] = useState(false); // control del modal de abastecimiento
+    const [productSelected, setProductSelected] = useState(null); // control del modal de Edicion
+    const [pending, setPending] = useState(true); // control del estado de carga
 
     useEffect(() => {
         fetchProduct();
     }, []);
-
 
     const fetchProduct = async () => {
         try {
@@ -49,7 +48,7 @@ function Product(){
                 await fetchProduct();
             } catch (error) {
                 console.error("error al inhabilitar un producto", error);
-                await errorDisableProduct();                
+                await errorDisableProduct();
             };
         };
     };

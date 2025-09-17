@@ -14,12 +14,11 @@ function Sale(){
     const {user} = useAuth();
 
     if (!user) return null;
-
-    const [sale, setSale] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [saleSelected, setSaleSelected] = useState(null);
+    
+    const [sale, setSale] = useState([]);  
+    const [showModal, setShowModal] = useState(false);     
+    const [saleSelected, setSaleSelected] = useState(null); 
     const [pending, setPending] = useState(true);
-
 
     useEffect(() => {
         fetchSale();
