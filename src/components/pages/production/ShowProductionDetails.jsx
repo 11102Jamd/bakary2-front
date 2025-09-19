@@ -107,7 +107,7 @@ function ShowProductionDetails({ show, onHide, productionId }) {
                                                 production.consumptions.map((consumption, index) => (
                                                     <tr key={index}>
                                                         <td>{consumption.input?.name || `Insumo ID: ${consumption.input_id}`}</td>
-                                                        <td>{<NumberFormatter value={consumption.quantity_used}/>} {consumption.batch?.unit_converted}</td>
+                                                        <td><NumberFormatter value={consumption.quantity_used}/> {consumption.batch?.unit_converted}</td>
                                                         <td><NumberFormatter value={consumption.batch?.unit_price} prefix="$"/></td>
                                                         <td>{consumption.batch?.batch_number || 'N/A'}</td>
                                                         <td><NumberFormatter value={consumption.total_cost} prefix="$"/></td>

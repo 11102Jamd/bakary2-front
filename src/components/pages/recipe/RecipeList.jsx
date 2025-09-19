@@ -74,7 +74,7 @@ function Recipe(){
                             className='btn btn-warning btn-sm rounded-2 p-2'
                             title="Inhabilitar"
                         >
-                            <i className="bi bi-trash fs-6"></i>
+                            <i className="bi bi-lock-fill"></i>
                         </button>
                     )}
                     <button 

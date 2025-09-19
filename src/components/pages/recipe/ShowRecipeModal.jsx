@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { getRecipeDetails } from "../../../api/recipe";
 import { errorShowDetailsRecipe } from "../../../utils/alerts/recipeAlert";
+import NumberFormatter from "../../NumberFormatter";
 
 function ShowRecipeModal({ show, onHide, recipeId }){
     const [recipe, setRecipe] = useState(null);
@@ -99,7 +100,7 @@ function ShowRecipeModal({ show, onHide, recipeId }){
                                                 recipe.recipe_ingredients.map((ingredient, index) => (
                                                     <tr key={index}>
                                                         <td>{ingredient.input?.name || `Insumo ID: ${ingredient.input_id}`}</td>
-                                                        <td>{ingredient.quantity_required} {ingredient.unit_used}</td>
+                                                        <td><NumberFormatter value={ingredient.quantity_required}/> {ingredient.unit_used}</td>
                                                     </tr>
                                                 ))
                                             ) : (

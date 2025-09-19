@@ -168,3 +168,21 @@ export const successDisableUser = () => {
         }
     });
 };
+
+
+export const errorDisableSessionUser = () => {
+    return Swal.fire({
+        title:"Error",
+        text:"Usted no puede eliminarse a si Mismo",
+        icon:"warning",
+        background:"#fff",
+        color:"#220900",
+        width :'350px',
+        customClass: {
+            popup: "my-swal-popup",
+            title: "my-swal-title",
+            htmlContainer: "my-swal-text",
+            confirmButton: "my-swal-button",
+        }
+    });
+};
